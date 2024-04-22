@@ -1,0 +1,9 @@
+*.o
+.vscode
+asm_
+*.s
+*.cor
+asm
+B-CPE-200_*
+my_asm/
+coding-style-reports.log
