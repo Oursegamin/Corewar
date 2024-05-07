@@ -5,27 +5,28 @@
 ## task01
 ##
 
-SRC     =	my_putchar.c	\
-			my_put_errchar.c\
-			my_put_errstr.c	\
-			my_putstr.c		\
-			my_revstr.c		\
-			my_strlen.c		\
-			my_revstr.c		\
-			my_getnbr.c		\
-			my_strcmp.c		\
-			my_strncmp.c	\
-			my_strcpy.c		\
-			my_strncpy.c	\
-			my_strdup.c		\
-			my_strndup.c	\
-			my_strcat.c		\
-			my_strtok.c		\
-			my_strstr.c		\
-			my_arraylen.c	\
-			my_int_to_base.c\
-			my_bin_to_dec.c	\
-			my_htonl.c		\
+SRC     =	my_putchar.c			\
+			my_put_errchar.c		\
+			my_put_errstr.c			\
+			my_putstr.c				\
+			my_revstr.c				\
+			my_strlen.c				\
+			my_revstr.c				\
+			my_getnbr.c				\
+			my_strcmp.c				\
+			my_strncmp.c			\
+			my_strcpy.c				\
+			my_strncpy.c			\
+			my_strdup.c				\
+			my_strndup.c			\
+			my_strcat.c				\
+			my_strtok.c				\
+			my_strstr.c				\
+			my_arraylen.c			\
+			my_int_to_base.c		\
+			my_bin_to_dec.c			\
+			my_compute_power_rec.c	\
+			my_hton.c				\
 
 OBJ     =	$(SRC:.c=.o)
 

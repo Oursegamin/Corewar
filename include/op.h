@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** B-CPE-200-BDX-2-1-robotfactory-florian.labadie
+** B-CPE-200-BDX-2-1-corewar-florian.labadie
 ** File description:
 ** op.h for  korewar
 */
@@ -41,8 +41,8 @@ typedef char args_type_t;
 
     #define T_REG 1 /* register */
     #define T_DIR 2 /* direct  (ld  #1,r1  put 1 into r1) */
-    #define T_IND 4 /* indirect always relative
-    (ld 1,r1 put what's in the address (1+pc) into r1 (4 bytes )) */
+    #define T_IND 4 /* indirect always relative */
+    /*(ld 1,r1 put what's in the address (1+pc) into r1 (4 bytes )) */
     #define T_LAB 8 /* LABEL */
 
 typedef struct op_s {

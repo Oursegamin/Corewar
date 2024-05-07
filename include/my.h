@@ -7,11 +7,12 @@
 
 #ifndef LIB_H_
     #define LIB_H_
+
+    #include "enum.h"
+
     #include "op.h"
-    #include "robot_f.h"
-    #define OK 0
-    #define ERR -1
-    #define KO 84
+    #include "corewar.h"
+
     #include <stdlib.h>
     #include <stddef.h>
     #include <stdio.h>
@@ -19,6 +20,9 @@
     #include <fcntl.h>
     #include <sys/stat.h>
     #include <string.h>
+
+    #include "macro.h"
+    #include "proto.h"
 
 int my_putchar(char c);
 void my_put_errchar(char c);
@@ -39,6 +43,7 @@ char *my_strstr(char const *str, char const *needle);
 int my_arraylen(char **array);
 char *my_int_to_base(unsigned long nbr, int base);
 int bin_to_dec(const char *binary);
+int my_compute_power_rec(int nb, int p);
 unsigned int my_htonl(int valeur);
 unsigned short my_htons(unsigned short valeur);
 

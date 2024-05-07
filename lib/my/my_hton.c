@@ -5,7 +5,6 @@
 ** my_hontl
 */
 
-
 unsigned short my_htons(unsigned short valeur)
 {
     return ((valeur & 0xFF00) >> 8) | ((valeur & 0x00FF) << 8);

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** B-CPE-200-BDX-2-1-robotfactory-florian.labadie
+** B-CPE-200-BDX-2-1-corewar-florian.labadie
 ** File description:
 ** my_bin_to_dec
 */

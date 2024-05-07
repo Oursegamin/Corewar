@@ -5,11 +5,22 @@
 ## solostumper
 ##
 
-SRC =	 	main.c							\
+MAIN =	 	main.c								\
 
-SRCTEST = 	tests/test.c					\
+SRC =	 	src/error_handling.c				\
+			src/open_file.c						\
+			src/corewar.c						\
 
-OBJ = $(SRC:.c=.o)
+PARSING	=	src/parsing/parsing.c				\
+			src/parsing/champion_parsing.c		\
+
+INSTRUCTION	=	src/instruct/parse_instruct.c	\
+				src/instruct/op.c				\
+
+
+SRCTEST = 	tests/test.c						\
+
+OBJ =	$(MAIN:.c=.o) $(SRC:.c=.o) $(PARSING:.c=.o) $(INSTRUCTION:.c=.o)
 
 OBJTEST = $(SRCTEST:.c=.o)
 
@@ -17,11 +28,11 @@ NAME =		corewar
 
 NAMETEST = 	unit_tests
 
-CFLAGS = -Wall -Wextra -std=c99 -g3
+CFLAGS = -Wall -Wextra -g3
 
 CPPFLAGS	=	-I./include
 
-LDFLAGS = -L./lib/my
+LDFLAGS	= -L./lib/my
 
 LDLIBS = -lmy
 
@@ -52,7 +63,6 @@ clean:
 	find . -name "*.gcda" -delete
 	find . -name "*.gcov" -delete
 	find . -name "coding-style-reports.log" -delete
-	find . -name "*.cor" -delete
 
 fclean: clean cleantest
 	rm -f $(NAME)
