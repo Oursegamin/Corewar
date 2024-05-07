@@ -37,15 +37,15 @@ int parse_champion_header(champion_t **champions, char **filepath)
     __uint32_t *tmp = (__uint32_t *)my_strndup(*filepath, 4);
 
     *tmp = my_htonl(*tmp);
-    if (*tmp != COREWAR_EXEC_MAGIC)
+    if (!tmp || *tmp != COREWAR_EXEC_MAGIC)
         return KO;
+    free(tmp);
     (*champions)->prog_name = my_strdup(&(*filepath)[4]);
-    if (!tmp)
-        return KO;
     tmp = (__uint32_t *)my_strndup(&(*filepath)[8 + PROG_NAME_LENGTH], 4);
     if (!tmp)
         return KO;
     (*champions)->prog_size = my_htonl(*tmp);
+    free(tmp);
     *filepath = *filepath + sizeof(header_t);
     return OK;
 }
@@ -54,8 +54,6 @@ int parse_champion_body(champion_t **champions, char **filepath)
 {
     (*champions)->instructions = (__uint8_t *)my_strndup(*filepath,
         (*champions)->prog_size);
-    if (!(*champions)->instructions)
-        return KO;
     return OK;
 }
 

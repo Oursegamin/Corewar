@@ -4,6 +4,7 @@ asm_
 *.s
 *.cor
 asm
+corewar
 B-CPE-200_*
 my_asm/
 coding-style-reports.log

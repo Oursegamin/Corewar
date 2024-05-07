@@ -8,9 +8,12 @@
 #ifndef COREWAR_F_H_
     #define COREWAR_F_H_
 
+    #include <stdbool.h>
     #include <stdint.h>
 
 typedef struct champion_s {
+    bool is_alive;
+
     char *prog_name;
     int prog_size;
     __uint8_t *instructions;
@@ -21,7 +24,7 @@ typedef struct champion_s {
     int prog_number;
     int load_address;
 
-    char carry;
+    bool carry;
 } champion_t;
 
 typedef struct corewar_s {

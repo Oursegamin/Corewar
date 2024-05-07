@@ -40,11 +40,12 @@ static int malloc_corewar(int argc, char const *const *argv,
         corewar->champions[i] = malloc(sizeof(champion_t));
         if (!corewar->champions[i])
             return KO;
+        corewar->champions[i]->is_alive = true;
         corewar->champions[i]->PC = -1;
         corewar->champions[i]->nbr_cycle = 0;
         corewar->champions[i]->prog_number = -1;
         corewar->champions[i]->load_address = -1;
-        corewar->champions[i]->carry = 0;
+        corewar->champions[i]->carry = false;
     }
     corewar->champions[prog_nbrs] = NULL;
     return OK;
