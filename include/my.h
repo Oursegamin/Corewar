@@ -46,5 +46,6 @@ int bin_to_dec(const char *binary);
 int my_compute_power_rec(int nb, int p);
 unsigned int my_htonl(int valeur);
 unsigned short my_htons(unsigned short valeur);
+void memcpy_custom(void *dest, const void *src, size_t n);
 
 #endif /* LIB_H_ */

@@ -27,6 +27,7 @@ SRC     =	my_putchar.c			\
 			my_bin_to_dec.c			\
 			my_compute_power_rec.c	\
 			my_hton.c				\
+			my_memcpy.c
 
 OBJ     =	$(SRC:.c=.o)
 

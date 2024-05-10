@@ -28,7 +28,7 @@ typedef struct champion_s {
 } champion_t;
 
 typedef struct corewar_s {
-    __uint8_t memory[MEM_SIZE];
+    __uint8_t arena[MEM_SIZE];
 
     champion_t **champions;
 } corewar_t;
