@@ -10,6 +10,7 @@ MAIN =	 	main.c								\
 SRC =	 	src/error_handling.c				\
 			src/open_file.c						\
 			src/corewar.c						\
+			src/load_in_arena.c
 
 PARSING	=	src/parsing/parsing.c				\
 			src/parsing/champion_parsing.c		\

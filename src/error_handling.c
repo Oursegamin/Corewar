@@ -32,7 +32,7 @@ static int check_nbr_of_files(int argc, char const *const *argv)
         } else 
             return KO;
     }
-    if (nb >= 2 && nb <= 3)
+    if (nb >= 2 && nb <= 4)
         return OK;
     return KO;
 }

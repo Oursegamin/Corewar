@@ -21,7 +21,7 @@ static int count_progs(int argc, char const *const *argv)
         if (argv[i][0] != '-')
             nb += 1;
     }
-    if (nb >= 2 && nb <= 3)
+    if (nb >= 2 && nb <= 4)
         return nb;
     return -KO;
 }
@@ -60,6 +60,8 @@ int launch_war(int argc, char const *const *argv)
     if (malloc_corewar(argc, argv, corewar) == KO)
         return KO;
     if (parse_war_progs(corewar, argc, argv) == KO)
+        return KO;
+    if (load_in_arena(corewar) == KO)
         return KO;
     return OK;
 }
