@@ -17,7 +17,7 @@ void zjmp(corewar_t *corewar)
     
 }
 
-void fork(corewar_t *corewar)
+void fork_i(corewar_t *corewar)
 {
     
 }

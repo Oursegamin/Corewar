@@ -18,5 +18,21 @@ int load_in_arena(corewar_t *corewar);
 
 // INSTRUCTIONS
 instruct_types_t *get_instruct_types(uint8_t coding_byte);
+void live(corewar_t *corewar);
+void zjmp(corewar_t *corewar);
+void fork_i(corewar_t *corewar);
+void lfork(corewar_t *corewar);
+void ld(corewar_t *corewar);
+void lld(corewar_t *corewar);
+void ldi(corewar_t *corewar);
+void lldi(corewar_t *corewar);
+void and(corewar_t *corewar);
+void or(corewar_t *corewar);
+void xor(corewar_t *corewar);
+void add(corewar_t *corewar);
+void sub(corewar_t *corewar);
+void st(corewar_t *corewar);
+void sti(corewar_t *corewar);
+void aff(corewar_t *corewar);
 
 #endif /* !PROTO_H_ */
