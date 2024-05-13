@@ -26,6 +26,25 @@ static int count_progs(int argc, char const *const *argv)
     return -KO;
 }
 
+static int malloc_champions(corewar_t **corewar, int prog_nbrs)
+{
+    for (int i = 0; i < prog_nbrs; i++) {
+        (*corewar)->champions[i] = malloc(sizeof(champion_t));
+        if (!(*corewar)->champions[i])
+            return KO;
+        (*corewar)->champions[i]->instructions = NULL;
+        for (int j = 0; j < REG_NUMBER; j++)
+            (*corewar)->champions[i]->regs[j] = 0;
+        (*corewar)->champions[i]->is_alive = true;
+        (*corewar)->champions[i]->PC = -1;
+        (*corewar)->champions[i]->nbr_cycle = 0;
+        (*corewar)->champions[i]->prog_number = -1;
+        (*corewar)->champions[i]->carry = false;
+    }
+    (*corewar)->champions[prog_nbrs] = NULL;
+    return OK;
+}
+
 static int malloc_corewar(int argc, char const *const *argv,
     corewar_t *corewar)
 {
@@ -34,20 +53,11 @@ static int malloc_corewar(int argc, char const *const *argv,
     if (prog_nbrs == -KO)
         return KO;
     corewar->champions = malloc(sizeof(champion_t *) * (prog_nbrs + 1));
-    if (!corewar->champions)
+    for (int i = 0; i < MEM_SIZE; i++)
+        corewar->arena[i] = '\0';
+    corewar->champs_nbr = prog_nbrs;
+    if (!corewar->champions || malloc_champions(&corewar, prog_nbrs) == KO)
         return KO;
-    for (int i = 0; i < prog_nbrs; i++) {
-        corewar->champions[i] = malloc(sizeof(champion_t));
-        if (!corewar->champions[i])
-            return KO;
-        corewar->champions[i]->is_alive = true;
-        corewar->champions[i]->PC = -1;
-        corewar->champions[i]->nbr_cycle = 0;
-        corewar->champions[i]->prog_number = -1;
-        corewar->champions[i]->load_address = -1;
-        corewar->champions[i]->carry = false;
-    }
-    corewar->champions[prog_nbrs] = NULL;
     return OK;
 }
 
@@ -60,6 +70,8 @@ int launch_war(int argc, char const *const *argv)
     if (malloc_corewar(argc, argv, corewar) == KO)
         return KO;
     if (parse_war_progs(corewar, argc, argv) == KO)
+        return KO;
+    if (organized_champions(&corewar->champions, corewar->champs_nbr) == KO)
         return KO;
     if (load_in_arena(corewar) == KO)
         return KO;

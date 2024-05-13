@@ -19,16 +19,18 @@ typedef struct champion_s {
     __uint8_t *instructions;
 
     int PC;
+    int regs[REG_NUMBER];
 
     int nbr_cycle;
     int prog_number;
-    int load_address;
 
     bool carry;
 } champion_t;
 
 typedef struct corewar_s {
     __uint8_t arena[MEM_SIZE];
+
+    int champs_nbr;
 
     champion_t **champions;
 } corewar_t;

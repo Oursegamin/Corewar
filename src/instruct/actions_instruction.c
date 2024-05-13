@@ -7,17 +7,17 @@
 
 #include "my.h"
 
-void st(corewar_t *corewar)
+void st_i(corewar_t *corewar)
 {
-    
+    return;
 }
 
 void sti(corewar_t *corewar)
 {
-    
+    return;
 }
 
 void aff(corewar_t *corewar)
 {
-    
+    return;
 }

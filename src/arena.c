@@ -26,7 +26,7 @@ int champion_arena(corewar_t *corewar)
         if (is_alive(corewar->champions) == KO)
             break;
         for (int i = 0; corewar->champions[i] != NULL; i++) {
-            
+            break;
         }
     }
     return OK;
