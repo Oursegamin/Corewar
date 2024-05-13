@@ -7,6 +7,25 @@
 
 #include "my.h"
 
+static void (*intructions[16])(corewar_t *) = {
+    live,
+    ld_i,
+    st_i,
+    add,
+    sub,
+    and_i,
+    or_i,
+    xor_i,
+    zjmp,
+    ldi,
+    sti,
+    fork_i,
+    lld,
+    lldi,
+    lfork,
+    aff
+};
+
 static int is_alive(champion_t **champion)
 {
     int end = 0;
