@@ -7,17 +7,6 @@
 
 #include "my.h"
 
-void printArena(uint8_t arena[], size_t size) {
-    printf("Contenu de l'arène :\n");
-    for (size_t i = 0; i < size; i++) {
-        printf("%02X ", arena[i]);
-        if ((i + 1) % 16 == 0) {
-            printf("\n");
-        }
-    }
-    printf("\n");
-}
-
 static void loadchamp(champion_t **champions, uint8_t arena[])
 {
     size_t size_in_arena = 0;
@@ -25,11 +14,14 @@ static void loadchamp(champion_t **champions, uint8_t arena[])
 
     if ((*champions)->load_address + (*champions)->prog_size > MEM_SIZE) {
         size_in_arena = MEM_SIZE - (*champions)->load_address;
-        my_memcpy(arena + (*champions)->load_address, (*champions)->instructions, size_in_arena);
+        my_memcpy(arena + (*champions)->load_address,
+            (*champions)->instructions, size_in_arena);
         remaining_size = (*champions)->prog_size - size_in_arena;
-        my_memcpy(arena, (*champions)->instructions + size_in_arena, remaining_size);
+        my_memcpy(arena, (*champions)->instructions + size_in_arena,
+            remaining_size);
     } else {
-        my_memcpy(arena + (*champions)->load_address, (*champions)->instructions, (*champions)->prog_size);
+        my_memcpy(arena + (*champions)->load_address,
+            (*champions)->instructions, (*champions)->prog_size);
     }
 }
 

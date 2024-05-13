@@ -10,13 +10,18 @@ MAIN =	 	main.c								\
 SRC =	 	src/error_handling.c				\
 			src/open_file.c						\
 			src/corewar.c						\
-			src/load_in_arena.c
+			src/load_in_arena.c					\
+			src/arena.c
 
 PARSING	=	src/parsing/parsing.c				\
 			src/parsing/champion_parsing.c		\
 
 INSTRUCTION	=	src/instruct/parse_instruct.c	\
 				src/instruct/op.c				\
+				src/instruct/actions_instruction.c		\
+				src/instruct/cond_instruction.c	\
+				src/instruct/load_instruction.c	\
+				src/instruct/no_coding_byte_instruction.c	\
 
 
 SRCTEST = 	tests/test.c						\
