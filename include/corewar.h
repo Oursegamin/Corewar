@@ -30,6 +30,7 @@ typedef struct champion_s {
 typedef struct corewar_s {
     __uint8_t arena[MEM_SIZE];
 
+    int dump;
     champion_t **champions;
 } corewar_t;
 
