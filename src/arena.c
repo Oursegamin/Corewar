@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-static void (*intructions[16])(corewar_t *) = {
+static int (*intructions[16])(corewar_t *, champion_t **, int) = {
     live,
     ld_i,
     st_i,
@@ -39,14 +39,27 @@ static int is_alive(champion_t **champion)
     return OK;
 }
 
+static void execute_champion(corewar_t *corewar)
+{
+    for (int i = 0; corewar->champions[i] != NULL; i++) {
+        if (!corewar->champions[i]->is_alive)
+            continue;
+        if (corewar->arena[corewar->champions[i]->PC] < 17 &&
+            corewar->arena[corewar->champions[i]->PC] > 0 &&
+            intructions[corewar->arena[corewar->champions[i]->PC]]
+            (corewar, corewar->champions, i) == KO) {
+            corewar->champions[i]->is_alive = false;
+        } else
+            corewar->champions[i]->is_alive = false;
+    }
+}
+
 int champion_arena(corewar_t *corewar)
 {
     while (1) {
         if (is_alive(corewar->champions) == KO)
             break;
-        for (int i = 0; corewar->champions[i] != NULL; i++) {
-            break;
-        }
+        execute_champion(corewar);
     }
     return OK;
 }

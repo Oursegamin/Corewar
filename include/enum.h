@@ -16,4 +16,24 @@ typedef enum instruct_types_s {
     INSTRUCT_TYPES_SIZE
 } instruct_types_t;
 
+typedef enum instructions_s {
+    LIVE,
+    LD,
+    ST,
+    ADD,
+    SUB,
+    AND,
+    OR,
+    XOR,
+    ZJMP,
+    LDI,
+    STI,
+    FORK,
+    LLD,
+    LLDI,
+    LFORK,
+    AFF,
+    INSTRUCTIONS_SIZE
+} instructions_t;
+
 #endif /* !ENUM_H_ */

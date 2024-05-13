@@ -19,7 +19,7 @@ typedef struct champion_s {
     __uint8_t *instructions;
 
     int PC;
-    int regs[REG_NUMBER];
+    __uint16_t regs[REG_NUMBER];
 
     int nbr_cycle;
     int prog_number;

@@ -20,21 +20,25 @@ int load_in_arena(corewar_t *corewar);
 
 // INSTRUCTIONS
 instruct_types_t *get_instruct_types(uint8_t coding_byte);
-void live(corewar_t *corewar);
-void zjmp(corewar_t *corewar);
-void fork_i(corewar_t *corewar);
-void lfork(corewar_t *corewar);
-void ld_i(corewar_t *corewar);
-void lld(corewar_t *corewar);
-void ldi(corewar_t *corewar);
-void lldi(corewar_t *corewar);
-void and_i(corewar_t *corewar);
-void or_i(corewar_t *corewar);
-void xor_i(corewar_t *corewar);
-void add(corewar_t *corewar);
-void sub(corewar_t *corewar);
-void st_i(corewar_t *corewar);
-void sti(corewar_t *corewar);
-void aff(corewar_t *corewar);
+void live(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void zjmp(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void fork_i(corewar_t *corewar, champion_t **champion, int prog_nbrr);
+void lfork(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void ld_i(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void lld(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void ldi(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void lldi(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void and_i(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void or_i(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void xor_i(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void add(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void sub(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void st_i(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void sti(corewar_t *corewar, champion_t **champion, int prog_nbr);
+void aff(corewar_t *corewar, champion_t **champion, int prog_nbr);
+
+// INSTRUCTIONS PARSING
+int *parse_parameter(corewar_t *corewar, instruct_types_t *types,
+    instructions_t instruct, champion_t **champion)
 
 #endif /* !PROTO_H_ */
