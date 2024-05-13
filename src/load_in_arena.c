@@ -60,19 +60,24 @@ static void load_adress(corewar_t *corewar, int *i, init_area_t *area)
     }
 }
 
+static void check_next_champ(corewar_t *corewar, init_area_t *area, int *i)
+{
+    for (size_t j = *i + 1; corewar->champions[j] != NULL; j += 1) {
+        if (corewar->champions[j]->load_address > area->current_address) {
+            area->next_address =
+                corewar->champions[j]->load_address + area->padding;
+            area->check_space = true;
+            break;
+        }
+    }
+}
+
 static void no_load_adress(corewar_t *corewar, init_area_t *area, int *i)
 {  
     load_adress(corewar, i, area);
     if (corewar->champions[*i]->load_address == -1) {
         area->check_space = false;
-        for (size_t j = *i + 1; corewar->champions[j] != NULL; j += 1) {
-            if (corewar->champions[j]->load_address > area->current_address) {
-                area->next_address =
-                    corewar->champions[j]->load_address + area->padding;
-                area->check_space = true;
-                break;
-            }
-        }
+        check_next_champ(corewar, area, i);
         found_space(area);
         corewar->champions[*i]->load_address = area->next_address;
         loadchamp(&corewar->champions[*i], corewar->arena);
@@ -94,6 +99,6 @@ int load_in_arena(corewar_t *corewar)
     for (int i = 0; corewar->champions[i] != NULL; i += 1) {
         no_load_adress(corewar, area, &i);
     }
-    printArena(corewar->arena, MEM_SIZE);
+    // printArena(corewar->arena, MEM_SIZE);
     return (0);
 }

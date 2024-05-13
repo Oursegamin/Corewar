@@ -29,4 +29,5 @@ int champion_arena(corewar_t *corewar)
             
         }
     }
+    return OK;
 }

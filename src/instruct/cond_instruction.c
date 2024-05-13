@@ -7,17 +7,17 @@
 
 #include "my.h"
 
-void and(corewar_t *corewar)
+void and_i(corewar_t *corewar)
 {
 
 }
 
-void or(corewar_t *corewar)
+void or_i(corewar_t *corewar)
 {
     
 }
 
-void xor(corewar_t *corewar)
+void xor_i(corewar_t *corewar)
 {
     
 }
