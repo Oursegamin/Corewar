@@ -9,25 +9,25 @@
 
 void and_i(corewar_t *corewar)
 {
-
+    return;
 }
 
 void or_i(corewar_t *corewar)
 {
-    
+    return;
 }
 
 void xor_i(corewar_t *corewar)
 {
-    
+    return;
 }
 
 void add(corewar_t *corewar)
 {
-    
+    return;
 }
 
 void sub(corewar_t *corewar)
 {
-    
+    return;
 }

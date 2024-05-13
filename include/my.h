@@ -48,5 +48,6 @@ int my_compute_power_rec(int nb, int p);
 unsigned int my_htonl(int valeur);
 unsigned short my_htons(unsigned short valeur);
 void my_memcpy(void *dest, const void *src, size_t n);
+void my_swap(void *a, void *b, int size_a, int size_b);
 
 #endif /* LIB_H_ */

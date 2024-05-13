@@ -10,7 +10,7 @@
 static int check_is_cor_file(char const argv[])
 {
     if (my_strncmp(&argv[my_strlen(argv) - 4], ".cor", 4) != OK) {
-        my_put_errstr("\e[0;31mError :\e[0m is not a cor file !\n");
+        my_put_errstr("Error : is not a cor file !\n");
         return KO;
     }
     return OK;
@@ -29,7 +29,7 @@ static int check_nbr_of_files(int argc, char const *const *argv)
         }
         if (argv[i][0] != '-' && check_is_cor_file(argv[i]) == OK) {
             nb += 1;
-        } else 
+        } else
             return KO;
     }
     if (nb >= 2 && nb <= 4)
@@ -45,6 +45,5 @@ int error_handling(int argc, char const *const *argv)
         return KO;
     if (check_nbr_of_files(argc, argv) == KO)
         return KO;
-
     return OK;
 }

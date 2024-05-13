@@ -15,6 +15,8 @@ SRC =	 	src/error_handling.c				\
 
 PARSING	=	src/parsing/parsing.c				\
 			src/parsing/champion_parsing.c		\
+			src/parsing/organized_champs.c		\
+			src/parsing/sort_champions.c		\
 
 INSTRUCTION	=	src/instruct/parse_instruct.c	\
 				src/instruct/op.c				\

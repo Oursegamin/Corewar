@@ -14,6 +14,8 @@ int fs_open_file(const char *file);
 int launch_war(int argc, char const *const *argv);
 int parse_war_progs(corewar_t *corewar, int argc, char const *const *argv);
 int parse_champion(champion_t **champions, char const *filepath);
+int organized_champions(champion_t ***champions, int champs_nbr);
+void sort_champions(champion_t ***champions);
 int load_in_arena(corewar_t *corewar);
 
 // INSTRUCTIONS
@@ -22,7 +24,7 @@ void live(corewar_t *corewar);
 void zjmp(corewar_t *corewar);
 void fork_i(corewar_t *corewar);
 void lfork(corewar_t *corewar);
-void ld(corewar_t *corewar);
+void ld_i(corewar_t *corewar);
 void lld(corewar_t *corewar);
 void ldi(corewar_t *corewar);
 void lldi(corewar_t *corewar);
@@ -31,7 +33,7 @@ void or_i(corewar_t *corewar);
 void xor_i(corewar_t *corewar);
 void add(corewar_t *corewar);
 void sub(corewar_t *corewar);
-void st(corewar_t *corewar);
+void st_i(corewar_t *corewar);
 void sti(corewar_t *corewar);
 void aff(corewar_t *corewar);
 

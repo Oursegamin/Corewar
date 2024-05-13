@@ -9,20 +9,20 @@
 
 void live(corewar_t *corewar)
 {
-    
+    return;
 }
 
 void zjmp(corewar_t *corewar)
 {
-    
+    return;
 }
 
 void fork_i(corewar_t *corewar)
 {
-    
+    return;
 }
 
 void lfork(corewar_t *corewar)
 {
-    
+    return;
 }

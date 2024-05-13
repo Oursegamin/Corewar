@@ -1,0 +1,68 @@
+name: continuons-integration
+
+on:
+    push:
+        branches-ignore: [ga-ignore-*]
+    pull_request:
+        branches-ignore: [ga-ignore-*]
+
+jobs:
+
+    coding-style:
+        runs-on: ubuntu-latest
+        container:
+            image: ghcr.io/epitech/coding-style-checker:latest
+        steps:
+
+            - name: Checkout GH repo
+              uses: actions/checkout@v4
+
+            - name: Run coding-style.sh
+              run: check.sh $(pwd) $(pwd)
+
+            - name: Report banana result
+              run: |
+                NB_ERROR=$(cat coding-style-reports.log | wc -l)
+                if [ $NB_ERROR -gt 0 ]; then
+                    ERROR=$(cat coding-style-reports.log)
+                    echo "::ERROR title=$NB_ERROR errors found::$ERROR"
+                    exit 1
+                fi
+                exit 0
+
+    compile:
+        runs-on: ubuntu-latest
+        steps:
+
+            - name: Checkout GM repo
+              uses: actions/checkout@v4
+
+            - name: Compile repository
+              run: make
+
+            - name: Check bianry presence
+              run: |
+                if [ ! -f ./corewar ]; then
+                    echo "::error file =amazed, title=Binary Error::Binary not found"
+                    exit 1
+                fi
+                exit 0
+
+    # run-test:
+    #     runs-on: ubuntu-latest
+    #     container:
+    #         image: epitechcontent/epitest-docker:latest
+    #     needs: [compile, coding-style]
+    #     steps:
+
+    #         - name: Checkout GH repo
+    #           uses: actions/checkout@v4
+
+    #         - name: Compile unit tests
+    #           run: make tests_run
+
+    #         - name: Run unit tests
+    #           run: ./unit_tests
+
+    #         # - name: Run integration tests
+    #         #   run: ./integration_testing

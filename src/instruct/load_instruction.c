@@ -7,22 +7,22 @@
 
 #include "my.h"
 
-void ld(corewar_t *corewar)
+void ld_i(corewar_t *corewar)
 {
-    
+    return;
 }
 
 void lld(corewar_t *corewar)
 {
-    
+    return;
 }
 
 void ldi(corewar_t *corewar)
 {
-    
+    return;
 }
 
 void lldi(corewar_t *corewar)
 {
-    
+    return;
 }
