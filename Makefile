@@ -24,6 +24,7 @@ INSTRUCTION	=	src/instruct/parse_instruct.c	\
 				src/instruct/cond_instruction.c	\
 				src/instruct/load_instruction.c	\
 				src/instruct/no_coding_byte_instruction.c	\
+				src/instruct/change_carry.c		\
 
 
 SRCTEST = 	tests/test.c						\
