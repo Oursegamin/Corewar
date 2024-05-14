@@ -65,7 +65,7 @@ int launch_war(int argc, char const *const *argv)
 {
     corewar_t *corewar = malloc(sizeof(corewar_t));
 
-    if (!argv)
+    if (!argv || !corewar)
         return KO;
     if (malloc_corewar(argc, argv, corewar) == KO)
         return KO;
@@ -74,6 +74,8 @@ int launch_war(int argc, char const *const *argv)
     if (organized_champions(&corewar->champions, corewar->champs_nbr) == KO)
         return KO;
     if (load_in_arena(corewar) == KO)
+        return KO;
+    if (champion_arena(corewar) == KO)
         return KO;
     return OK;
 }

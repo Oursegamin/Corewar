@@ -7,8 +7,8 @@
 
 #include "my.h"
 
-static int *ld_init_(corewar_t *corewar, champion_t **champion, 
-    instruct_types_t *types ,int prog_nbr)
+static int *ld_init(corewar_t *corewar, champion_t **champion,
+    instruct_types_t *types, int prog_nbr)
 {
     if (!types)
         return NULL;
@@ -18,8 +18,8 @@ static int *ld_init_(corewar_t *corewar, champion_t **champion,
     return parse_parameter(corewar, types, LD, champion);
 }
 
-static int *lld_init_(corewar_t *corewar, champion_t **champion, 
-    instruct_types_t *types ,int prog_nbr)
+static int *lld_init(corewar_t *corewar, champion_t **champion,
+    instruct_types_t *types, int prog_nbr)
 {
     if (!types)
         return NULL;
@@ -36,15 +36,15 @@ int ld_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
         get_instruct_types(corewar->arena[champion[prog_nbr]->PC + 1]);
     uint32_t *load = NULL;
 
-    champion[prog_nbr]->current_PC  = champion[prog_nbr]->PC;
-    args = ld_init_(corewar, champion, types, prog_nbr);
+    champion[prog_nbr]->current_PC = champion[prog_nbr]->PC;
+    args = ld_init(corewar, champion, types, prog_nbr);
     if (!args)
         return KO;
     if (types[0] == DIRECT) {
         *load = args[0];
     } else if (types[0] == INDIRECT)
-        *load = *((uint32_t *)my_uint8ndup
-            (corewar->arena[champion[prog_nbr]->current_PC + args[0]
+        *load = *((uint32_t *)my_uint8_ndup
+            (&corewar->arena[champion[prog_nbr]->current_PC + args[0]
             % IDX_MOD], REG_SIZE));
     champion[prog_nbr]->regs[args[1]] = *load;
     free(args);
@@ -60,14 +60,14 @@ int lld(corewar_t *corewar, champion_t **champion, int prog_nbr)
     uint32_t *load = NULL;
 
     champion[prog_nbr]->current_PC = champion[prog_nbr]->PC;
-    args = lld_init_(corewar, champion, types, prog_nbr);
+    args = lld_init(corewar, champion, types, prog_nbr);
     if (!args)
         return KO;
     if (types[0] == DIRECT) {
         *load = args[0];
     } else if (types[0] == INDIRECT)
-        *load = *((uint32_t *)my_uint8ndup
-            (corewar->arena[champion[prog_nbr]->current_PC + args[0]],
+        *load = *((uint32_t *)my_uint8_ndup
+            (&corewar->arena[champion[prog_nbr]->current_PC + args[0]],
             REG_SIZE));
     champion[prog_nbr]->regs[args[1]] = *load;
     free(args);
@@ -86,12 +86,12 @@ static void ldi_loop(corewar_t *corewar, int *args,
         if (types[i] == DIRECT)
             *load += args[i];
         if (types[i] == INDIRECT)
-            *load += *((uint32_t *)my_uint8ndup
-            (corewar->arena[corewar->champions[prog_nbr]->current_PC +
+            *load += *((uint32_t *)my_uint8_ndup
+            (&corewar->arena[corewar->champions[prog_nbr]->current_PC +
             args[i] % IDX_MOD], IND_SIZE));
     }
-    corewar->champions[prog_nbr]->regs[args[1]] = *((uint32_t *)my_uint8ndup
-            (corewar->arena[corewar->champions[prog_nbr]->current_PC +
+    corewar->champions[prog_nbr]->regs[args[1]] = *((uint32_t *)my_uint8_ndup
+            (&corewar->arena[corewar->champions[prog_nbr]->current_PC +
             *load % IDX_MOD], REG_SIZE));
     free(load);
 }
@@ -127,12 +127,12 @@ static void lldi_loop(corewar_t *corewar, int *args,
         if (types[i] == DIRECT)
             *load += args[i];
         if (types[i] == INDIRECT)
-            *load += *((uint32_t *)my_uint8ndup
-            (corewar->arena[corewar->champions[prog_nbr]->current_PC +
+            *load += *((uint32_t *)my_uint8_ndup
+            (&corewar->arena[corewar->champions[prog_nbr]->current_PC +
             args[i]], IND_SIZE));
     }
-    corewar->champions[prog_nbr]->regs[args[1]] = *((uint32_t *)my_uint8ndup
-            (corewar->arena[corewar->champions[prog_nbr]->current_PC +
+    corewar->champions[prog_nbr]->regs[args[1]] = *((uint32_t *)my_uint8_ndup
+            (&corewar->arena[corewar->champions[prog_nbr]->current_PC +
             *load], REG_SIZE));
     free(load);
 }

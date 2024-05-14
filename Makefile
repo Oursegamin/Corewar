@@ -7,27 +7,28 @@
 
 MAIN =	 	main.c								\
 
-SRC =	 	src/error_handling.c				\
-			src/open_file.c						\
-			src/corewar.c						\
-			src/load_in_arena.c					\
-			src/arena.c
+SRC =	 		src/error_handling.c				\
+				src/open_file.c						\
+				src/corewar.c						\
+				src/load_in_arena.c					\
+				src/arena.c							\
 
-PARSING	=	src/parsing/parsing.c				\
-			src/parsing/champion_parsing.c		\
-			src/parsing/organized_champs.c		\
-			src/parsing/sort_champions.c		\
+PARSING	=		src/parsing/parsing.c					\
+				src/parsing/champion_parsing.c			\
+				src/parsing/organized_champs.c			\
+				src/parsing/sort_champions.c			\
 
-INSTRUCTION	=	src/instruct/parse_instruct.c	\
-				src/instruct/op.c				\
-				src/instruct/actions_instruction.c		\
-				src/instruct/cond_instruction.c	\
-				src/instruct/load_instruction.c	\
+INSTRUCTION	=	src/instruct/parse_instruct.c				\
+				src/instruct/op.c							\
+				src/instruct/actions_instruction.c			\
+				src/instruct/cond_instruction.c				\
+				src/instruct/load_instruction.c				\
 				src/instruct/no_coding_byte_instruction.c	\
+				src/instruct/parse_param_from_arena.c		\
 				src/instruct/change_carry.c		\
 
 
-SRCTEST = 	tests/test.c						\
+SRCTEST = 	tests/test.c								\
 
 OBJ =	$(MAIN:.c=.o) $(SRC:.c=.o) $(PARSING:.c=.o) $(INSTRUCTION:.c=.o)
 

@@ -15,6 +15,8 @@ typedef struct champion_s {
     bool is_alive;
 
     char *prog_name;
+    int prog_number;
+
     int prog_size;
     __uint8_t *instructions;
 
@@ -23,7 +25,6 @@ typedef struct champion_s {
     __uint16_t regs[REG_NUMBER];
 
     int nbr_cycle;
-    int prog_number;
 
     bool carry;
 } champion_t;

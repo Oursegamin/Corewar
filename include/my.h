@@ -49,5 +49,6 @@ unsigned int my_htonl(int valeur);
 unsigned short my_htons(unsigned short valeur);
 void my_memcpy(void *dest, const void *src, size_t n);
 void my_swap(void *a, void *b, int size_a, int size_b);
+uint8_t *my_uint8_ndup(uint8_t const *src, int n);
 
 #endif /* LIB_H_ */
