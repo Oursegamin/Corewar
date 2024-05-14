@@ -17,6 +17,7 @@ int parse_champion(champion_t **champions, char const *filepath);
 int organized_champions(champion_t ***champions, int champs_nbr);
 void sort_champions(champion_t ***champions);
 int load_in_arena(corewar_t *corewar);
+int champion_arena(corewar_t *corewar);
 
 // INSTRUCTIONS
 instruct_types_t *get_instruct_types(uint8_t coding_byte);

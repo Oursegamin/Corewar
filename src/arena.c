@@ -56,6 +56,8 @@ static void execute_champion(corewar_t *corewar)
 
 int champion_arena(corewar_t *corewar)
 {
+    
+    return OK;
     while (1) {
         if (is_alive(corewar->champions) == KO)
             break;

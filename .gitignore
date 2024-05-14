@@ -1,10 +1,9 @@
 *.o
 .vscode
-asm_
 *.s
 *.cor
-asm
+*asm*
+*vm*
 corewar
 B-CPE-200_*
-my_asm/
 coding-style-reports.log

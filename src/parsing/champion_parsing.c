@@ -40,6 +40,7 @@ int parse_champion_header(champion_t **champions, char **filepath)
     if (!tmp || *tmp != COREWAR_EXEC_MAGIC)
         return KO;
     free(tmp);
+    tmp = NULL;
     (*champions)->prog_name = my_strdup(&(*filepath)[4]);
     tmp = (__uint32_t *)my_strndup(&(*filepath)[8 + PROG_NAME_LENGTH], 4);
     if (!tmp)
