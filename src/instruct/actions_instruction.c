@@ -7,17 +7,17 @@
 
 #include "my.h"
 
-void st_i(corewar_t *corewar)
+int st_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
 {
-    return;
+    return OK;
 }
 
-void sti(corewar_t *corewar)
+int sti(corewar_t *corewar, champion_t **champion, int prog_nbr)
 {
-    return;
+    return OK;
 }
 
-void aff(corewar_t *corewar)
+int aff(corewar_t *corewar, champion_t **champion, int prog_nbr)
 {
-    return;
+    return OK;
 }

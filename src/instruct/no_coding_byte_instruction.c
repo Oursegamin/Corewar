@@ -7,22 +7,22 @@
 
 #include "my.h"
 
-void live(corewar_t *corewar)
+int live(corewar_t *corewar, champion_t **champion, int prog_nbr)
 {
-    return;
+    return OK;
 }
 
-void zjmp(corewar_t *corewar)
+int zjmp(corewar_t *corewar, champion_t **champion, int prog_nbr)
 {
-    return;
+    return OK;
 }
 
-void fork_i(corewar_t *corewar)
+int fork_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
 {
-    return;
+    return OK;
 }
 
-void lfork(corewar_t *corewar)
+int lfork(corewar_t *corewar, champion_t **champion, int prog_nbr)
 {
-    return;
+    return OK;
 }
