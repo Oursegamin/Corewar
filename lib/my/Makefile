@@ -9,6 +9,7 @@ SRC     =	my_putchar.c			\
 			my_put_errchar.c		\
 			my_put_errstr.c			\
 			my_putstr.c				\
+			my_putnbr.c				\
 			my_revstr.c				\
 			my_strlen.c				\
 			my_revstr.c				\

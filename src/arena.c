@@ -42,23 +42,31 @@ static int is_alive(champion_t **champion)
 static void execute_champion(corewar_t *corewar)
 {
     for (int i = 0; corewar->champions[i] != NULL; i++) {
+        if (is_alive(corewar->champions) == KO)
+            break;
+        if (corewar->champions[i]->cycle_to_die <= 0)
+            corewar->champions[i]->is_alive = false;
         if (!corewar->champions[i]->is_alive)
             continue;
-        if (corewar->arena[corewar->champions[i]->PC] < 17 &&
-            corewar->arena[corewar->champions[i]->PC] > 0 &&
-            intructions[corewar->arena[corewar->champions[i]->PC]]
+        if (corewar->champions[i]->cycle_to_wait > 0) {
+            corewar->champions[i]->cycle_to_wait -= 1;
+            continue;
+        }
+        if (corewar->arena[corewar->champions[i]->PC] > 16 ||
+            corewar->arena[corewar->champions[i]->PC] < 1 ||
+            intructions[corewar->arena[corewar->champions[i]->PC] - 1]
             (corewar, corewar->champions, i) == KO) {
             corewar->champions[i]->is_alive = false;
-        } else
-            corewar->champions[i]->is_alive = false;
+        }
+        corewar->champions[i]->cycle_to_die -= 1;
     }
 }
 
 int champion_arena(corewar_t *corewar)
 {
-    while (1) {
-        if (is_alive(corewar->champions) == KO)
-            break;
+    execute_champion(corewar);
+    return OK;
+    while (is_alive(corewar->champions) == OK) {
         execute_champion(corewar);
     }
     return OK;

@@ -31,7 +31,7 @@ int st_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
     champion[prog_nbr]->current_PC = champion[prog_nbr]->PC;
     if (!types)
         return KO;
-    champion[prog_nbr]->nbr_cycle += op_tab[ST].nbr_cycles;
+    champion[prog_nbr]->cycle_to_wait += op_tab[ST].nbr_cycles;
     champion[prog_nbr]->PC += 2;
     args = parse_parameter(corewar, types, ST, champion);
     if (!args)
@@ -55,7 +55,7 @@ int sti(corewar_t *corewar, champion_t **champion, int prog_nbr)
     champion[prog_nbr]->current_PC = champion[prog_nbr]->PC;
     if (!types)
         return KO;
-    champion[prog_nbr]->nbr_cycle += op_tab[STI].nbr_cycles;
+    champion[prog_nbr]->cycle_to_wait += op_tab[STI].nbr_cycles;
     champion[prog_nbr]->PC += 2;
     args = parse_parameter(corewar, types, STI, champion);
     if (!args)
@@ -75,7 +75,7 @@ int aff(corewar_t *corewar, champion_t **champion, int prog_nbr)
     champion[prog_nbr]->current_PC = champion[prog_nbr]->PC;
     if (!types)
         return KO;
-    champion[prog_nbr]->nbr_cycle += op_tab[AFF].nbr_cycles;
+    champion[prog_nbr]->cycle_to_wait += op_tab[AFF].nbr_cycles;
     champion[prog_nbr]->PC += 2;
     args = parse_parameter(corewar, types, AFF, champion);
     if (!args)

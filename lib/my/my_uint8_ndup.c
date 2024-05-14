@@ -14,9 +14,8 @@ uint8_t *my_uint8_ndup(uint8_t const *src, int n)
 
     if (!src)
         return NULL;
-    str = malloc(sizeof(uint8_t) * (n + 1));
-    for (; i < n && src[i] != '\0'; i++)
+    str = malloc(sizeof(uint8_t) * n);
+    for (; i < n; i++)
         str[i] = src[i];
-    str[i] = '\0';
     return str;
 }

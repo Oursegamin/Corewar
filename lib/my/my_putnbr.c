@@ -5,10 +5,9 @@
 ** pasfais
 */
 
-#include "../../include/my.h"
-#include <stdio.h>
+#include "my.h"
 
-int my_put_nbr(int nb)
+int my_putnbr(int nb)
 {
     int count = 1;
     int tmp = nb;
@@ -24,7 +23,7 @@ int my_put_nbr(int nb)
         count = count + 1;
     }
     if (nb % 10 != nb) {
-        my_put_nbr((nb - (nb % 10)) / 10);
+        my_putnbr((nb - (nb % 10)) / 10);
         my_putchar(48 + (nb % 10));
     } else {
         my_putchar(48 + nb);

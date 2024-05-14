@@ -36,8 +36,9 @@ static int malloc_champions(corewar_t **corewar, int prog_nbrs)
         for (int j = 0; j < REG_NUMBER; j++)
             (*corewar)->champions[i]->regs[j] = 0;
         (*corewar)->champions[i]->is_alive = true;
+        (*corewar)->champions[i]->cycle_to_die = CYCLE_TO_DIE;
         (*corewar)->champions[i]->PC = -1;
-        (*corewar)->champions[i]->nbr_cycle = 0;
+        (*corewar)->champions[i]->cycle_to_wait = 0;
         (*corewar)->champions[i]->prog_number = -1;
         (*corewar)->champions[i]->carry = false;
     }
@@ -56,6 +57,7 @@ static int malloc_corewar(int argc, char const *const *argv,
     for (int i = 0; i < MEM_SIZE; i++)
         corewar->arena[i] = '\0';
     corewar->champs_nbr = prog_nbrs;
+    corewar->current_nbr_live = 0;
     if (!corewar->champions || malloc_champions(&corewar, prog_nbrs) == KO)
         return KO;
     return OK;

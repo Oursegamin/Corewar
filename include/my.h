@@ -29,6 +29,7 @@ int my_putchar(char c);
 void my_put_errchar(char c);
 int my_putstr(char const *str);
 int my_put_errstr(char const *str);
+int my_putnbr(int nb);
 int my_strlen(char const *str);
 char *my_revstr(char *str);
 int my_strcmp(char const *s1, char const *s2);

@@ -13,6 +13,7 @@
 
 typedef struct champion_s {
     bool is_alive;
+    int cycle_to_die;
 
     char *prog_name;
     int prog_number;
@@ -24,7 +25,7 @@ typedef struct champion_s {
     int current_PC;
     __uint16_t regs[REG_NUMBER];
 
-    int nbr_cycle;
+    int cycle_to_wait;
 
     bool carry;
 } champion_t;
@@ -34,6 +35,8 @@ typedef struct corewar_s {
 
     int dump;
     int champs_nbr;
+
+    int current_nbr_live;
 
     champion_t **champions;
 } corewar_t;

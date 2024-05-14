@@ -15,7 +15,7 @@ int live(corewar_t *corewar, champion_t **champion, int prog_nbr)
 
     if (!types)
         return KO;
-    champion[prog_nbr]->nbr_cycle += op_tab[LIVE].nbr_cycles;
+    champion[prog_nbr]->cycle_to_wait += op_tab[LIVE].nbr_cycles;
     champion[prog_nbr]->PC += 1;
     args = parse_parameter(corewar, types, LIVE, champion);
     if (!args)
@@ -24,7 +24,9 @@ int live(corewar_t *corewar, champion_t **champion, int prog_nbr)
     my_putnbr(champion[prog_nbr]->prog_number);
     my_putchar('(');
     my_putstr(champion[prog_nbr]->prog_name);
-    my_putchar(")is alive.\n");
+    my_putstr(")is alive.\n");
+    champion[prog_nbr]->cycle_to_die = CYCLE_TO_DIE;
+    corewar->current_nbr_live += 1;
     free(args);
     return OK;
 }

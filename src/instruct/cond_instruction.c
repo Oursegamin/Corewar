@@ -33,7 +33,7 @@ int add(corewar_t *corewar, champion_t **champion, int prog_nbr)
 
     if (!types)
         return KO;
-    champion[prog_nbr]->nbr_cycle += op_tab[ADD].nbr_cycles;
+    champion[prog_nbr]->cycle_to_wait += op_tab[ADD].nbr_cycles;
     champion[prog_nbr]->PC += 2;
     champion[prog_nbr]->carry =
         champion[prog_nbr]->carry == false ? true : false;
@@ -54,7 +54,7 @@ int sub(corewar_t *corewar, champion_t **champion, int prog_nbr)
 
     if (!types)
         return KO;
-    champion[prog_nbr]->nbr_cycle += op_tab[SUB].nbr_cycles;
+    champion[prog_nbr]->cycle_to_wait += op_tab[SUB].nbr_cycles;
     champion[prog_nbr]->PC += 2;
     args = parse_parameter(corewar, types, SUB, champion);
     if (!args)
@@ -65,7 +65,6 @@ int sub(corewar_t *corewar, champion_t **champion, int prog_nbr)
     return OK;
 }
 
-
 int and_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
 {
     int *args = NULL;
@@ -75,7 +74,7 @@ int and_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
 
     if (!types)
         return KO;
-    champion[prog_nbr]->nbr_cycle += op_tab[AND].nbr_cycles;
+    champion[prog_nbr]->cycle_to_wait += op_tab[AND].nbr_cycles;
     champion[prog_nbr]->PC += 2;
     champion[prog_nbr]->carry =
         champion[prog_nbr]->carry == false ? true : false;
@@ -98,7 +97,7 @@ int or_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
 
     if (!types)
         return KO;
-    champion[prog_nbr]->nbr_cycle += op_tab[OR].nbr_cycles;
+    champion[prog_nbr]->cycle_to_wait += op_tab[OR].nbr_cycles;
     champion[prog_nbr]->PC += 2;
     args = parse_parameter(corewar, types, OR, champion);
     if (!args)
@@ -119,7 +118,7 @@ int xor_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
 
     if (!types)
         return KO;
-    champion[prog_nbr]->nbr_cycle += op_tab[XOR].nbr_cycles;
+    champion[prog_nbr]->cycle_to_wait += op_tab[XOR].nbr_cycles;
     champion[prog_nbr]->PC += 2;
     args = parse_parameter(corewar, types, XOR, champion);
     if (!args)
