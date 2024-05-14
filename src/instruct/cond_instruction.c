@@ -83,7 +83,7 @@ int and_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
     if (!args)
         return KO;
     load = get_value_loop(corewar, args, types, prog_nbr);
-    corewar->champions[prog_nbr]->regs[args[1]] = load[0] & load[1];
+    corewar->champions[prog_nbr]->regs[args[2]] = load[0] & load[1];
     free(load);
     free(args);
     return OK;
@@ -104,7 +104,7 @@ int or_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
     if (!args)
         return KO;
     load = get_value_loop(corewar, args, types, prog_nbr);
-    corewar->champions[prog_nbr]->regs[args[1]] = load[0] | load[1];
+    corewar->champions[prog_nbr]->regs[args[2]] = load[0] | load[1];
     free(load);
     free(args);
     return OK;
@@ -125,7 +125,7 @@ int xor_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
     if (!args)
         return KO;
     load = get_value_loop(corewar, args, types, prog_nbr);
-    corewar->champions[prog_nbr]->regs[args[1]] = load[0] ^ load[1];
+    corewar->champions[prog_nbr]->regs[args[2]] = load[0] ^ load[1];
     free(load);
     free(args);
     return OK;
