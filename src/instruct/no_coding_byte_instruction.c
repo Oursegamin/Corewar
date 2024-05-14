@@ -9,6 +9,23 @@
 
 int live(corewar_t *corewar, champion_t **champion, int prog_nbr)
 {
+    int *args = NULL;
+    instruct_types_t *types =
+        get_instruct_types(corewar->arena[champion[prog_nbr]->PC + 1]);
+
+    if (!types)
+        return KO;
+    champion[prog_nbr]->nbr_cycle += op_tab[LIVE].nbr_cycles;
+    champion[prog_nbr]->PC += 1;
+    args = parse_parameter(corewar, types, LIVE, champion);
+    if (!args)
+        return KO;
+    my_putstr("The player ");
+    my_putnbr(champion[prog_nbr]->prog_number);
+    my_putchar('(');
+    my_putstr(champion[prog_nbr]->prog_name);
+    my_putchar(")is alive.\n");
+    free(args);
     return OK;
 }
 
