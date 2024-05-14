@@ -42,14 +42,14 @@ static uint32_t check_direct_size(instruct_types_t *types,
 static uint32_t get_register_value(corewar_t *corewar, instruct_types_t *types,
     champion_t **champion)
 {
-    uint8_t reg = -KO;
+    uint8_t reg = 0;
 
-    if ((*champion)->regs[corewar->arena[(*champion)->PC]] < 1 ||
-        (*champion)->regs[corewar->arena[(*champion)->PC]] > 16) {
+    if (corewar->arena[(*champion)->PC] < 1 ||
+        corewar->arena[(*champion)->PC] > 16) {
         *types = NO_MORE_TYPE;
         return reg;
     }
-    reg = (uint8_t)(*champion)->regs[corewar->arena[(*champion)->PC]];
+    reg = (uint8_t)corewar->arena[(*champion)->PC];
     (*champion)->PC = ((*champion)->PC + T_REG) % MEM_SIZE;
     if (reg > 16 || reg < 1)
         *types = NO_MORE_TYPE;

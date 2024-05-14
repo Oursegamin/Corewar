@@ -23,7 +23,7 @@ instruct_types_t *get_instruct_types(uint8_t coding_byte)
     int bits = 0;
 
     types[0] = NO_MORE_TYPE;
-    for (int i = NO_MORE_TYPE - 1; i >= 0; i--) {
+    for (int i = INDIRECT; i >= 0; i--) {
         bits = (coding_byte >> 2 * i) & 3;
         if (bits == 0)
             break;
