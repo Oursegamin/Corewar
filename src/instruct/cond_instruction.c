@@ -43,6 +43,7 @@ int add(corewar_t *corewar, champion_t **champion, int prog_nbr)
     champion[prog_nbr]->regs[args[2]] = champion[prog_nbr]->regs[args[0]] +
         champion[prog_nbr]->regs[args[1]];
     free(args);
+    free(types);
     return OK;
 }
 
@@ -62,6 +63,7 @@ int sub(corewar_t *corewar, champion_t **champion, int prog_nbr)
     champion[prog_nbr]->regs[args[2]] = champion[prog_nbr]->regs[args[0]] -
         champion[prog_nbr]->regs[args[1]];
     free(args);
+    free(types);
     return OK;
 }
 
@@ -85,6 +87,7 @@ int and_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
     corewar->champions[prog_nbr]->regs[args[2]] = load[0] & load[1];
     free(load);
     free(args);
+    free(types);
     return OK;
 }
 
@@ -106,6 +109,7 @@ int or_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
     corewar->champions[prog_nbr]->regs[args[2]] = load[0] | load[1];
     free(load);
     free(args);
+    free(types);
     return OK;
 }
 
@@ -127,5 +131,6 @@ int xor_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
     corewar->champions[prog_nbr]->regs[args[2]] = load[0] ^ load[1];
     free(load);
     free(args);
+    free(types);
     return OK;
 }

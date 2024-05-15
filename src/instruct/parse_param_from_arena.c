@@ -113,6 +113,7 @@ int *parse_parameter(corewar_t *corewar, instruct_types_t *types,
             args[i] = types_checker(corewar, &types[i], champion);
         if (types[i] == NO_MORE_TYPE) {
             free(args);
+    free(types);
             return NULL;
         }
         printf("args[%d] = %d\n", i, args[i]);

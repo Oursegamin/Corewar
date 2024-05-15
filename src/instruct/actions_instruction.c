@@ -43,6 +43,7 @@ int st_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
         corewar->arena[corewar->champions[prog_nbr]->current_PC +
             args[1] % IDX_MOD] = corewar->champions[prog_nbr]->regs[args[0]];
     free(args);
+    free(types);
     return OK;
 }
 
@@ -62,6 +63,7 @@ int sti(corewar_t *corewar, champion_t **champion, int prog_nbr)
         return KO;
     sti_loop(corewar, args, types, prog_nbr);
     free(args);
+    free(types);
     return OK;
 }
 
@@ -83,5 +85,6 @@ int aff(corewar_t *corewar, champion_t **champion, int prog_nbr)
     aff = corewar->champions[prog_nbr]->regs[args[0]] % (IDX_MOD / 2);
     my_putchar(aff);
     free(args);
+    free(types);
     return OK;
 }

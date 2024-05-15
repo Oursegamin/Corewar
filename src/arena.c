@@ -73,8 +73,6 @@ static void execute_champion(corewar_t *corewar)
 
 int champion_arena(corewar_t *corewar)
 {
-    execute_champion(corewar);
-    return OK;
     while (is_alive(corewar->champions) == OK) {
         execute_champion(corewar);
     }

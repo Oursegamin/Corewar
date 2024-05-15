@@ -48,6 +48,7 @@ int ld_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
             % IDX_MOD], REG_SIZE));
     champion[prog_nbr]->regs[args[1]] = load;
     free(args);
+    free(types);
     return OK;
 }
 
@@ -70,6 +71,7 @@ int lld(corewar_t *corewar, champion_t **champion, int prog_nbr)
             REG_SIZE));
     champion[prog_nbr]->regs[args[1]] = load;
     free(args);
+    free(types);
     return OK;
 }
 
@@ -110,6 +112,7 @@ int ldi(corewar_t *corewar, champion_t **champion, int prog_nbr)
         return KO;
     ldi_loop(corewar, args, types, prog_nbr);
     free(args);
+    free(types);
     return OK;
 }
 
@@ -150,5 +153,6 @@ int lldi(corewar_t *corewar, champion_t **champion, int prog_nbr)
         return KO;
     lldi_loop(corewar, args, types, prog_nbr);
     free(args);
+    free(types);
     return OK;
 }
