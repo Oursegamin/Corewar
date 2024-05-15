@@ -16,12 +16,23 @@ static void add_types(instruct_types_t **types,
     (*types)[*len] = NO_MORE_TYPE;
 }
 
-instruct_types_t *get_instruct_types(uint8_t coding_byte)
+static instruct_types_t *no_coding_bytes_types(instruct_types_t *types,
+    int len)
+{
+    add_types(&types, DIRECT, &len);
+    return types;
+}
+
+instruct_types_t *get_instruct_types(uint8_t coding_byte,
+    instruct_types_t *instruct)
 {
     int len = 0;
     instruct_types_t *types = malloc(sizeof(instruct_types_t) * (len + 1));
     int bits = 0;
 
+    if (instruct == LIVE || instruct == FORK ||
+        instruct == LFORK || instruct == ZJMP)
+        return no_coding_bytes_types(types, len);
     types[0] = NO_MORE_TYPE;
     for (int i = INDIRECT; i >= 0; i--) {
         bits = (coding_byte >> 2 * i) & 3;
