@@ -33,15 +33,89 @@ int live(corewar_t *corewar, champion_t **champion, int prog_nbr)
 
 int zjmp(corewar_t *corewar, champion_t **champion, int prog_nbr)
 {
+    int *args = NULL;
+    instruct_types_t *types =
+        get_instruct_types(corewar->arena[champion[prog_nbr]->PC + 1]);
+
+    champion[prog_nbr]->current_PC = champion[prog_nbr]->PC;
+    if (!types)
+        return KO;
+    champion[prog_nbr]->cycle_to_wait += op_tab[ZJMP].nbr_cycles;
+    champion[prog_nbr]->PC += 1;
+    args = parse_parameter(corewar, types, ZJMP, champion);
+    if (!args)
+        return KO;
+    if (champion[prog_nbr]->carry == 1 && types[0] == DIRECT)
+        champion[prog_nbr]->PC = champion[prog_nbr]->current_PC +
+            args[0] % IDX_MOD;
+    free(args);
     return OK;
+}
+
+static void dup_champ_fork(champion_t ***champion, int prog_nbr, int PC)
+{
+    int len = 0;
+
+    for (; (*champion)[len]; len += 1);
+    len + 1;
+    (*champion) = realloc(*champion, sizeof(champion_t) * (len + 1));
+    (*champion)[len] = NULL;
+    (*champion)[len - 1]->is_alive = true;
+    (*champion)[len - 1]->cycle_to_die = CYCLE_TO_DIE;
+    (*champion)[len - 1]->prog_name =
+        my_strdup((*champion)[prog_nbr]->prog_name);
+    (*champion)[len - 1]->prog_number = (*champion)[prog_nbr]->prog_number;
+    (*champion)[len - 1]->prog_size = 0;
+    (*champion)[len - 1]->instructions = NULL;
+    (*champion)[len - 1]->PC = PC;
+    (*champion)[len - 1]->current_PC = PC;
+    (*champion)[len - 1]->regs[0] = (*champion)[prog_nbr]->prog_number;
+    for (int i = 1; i < REG_NUMBER; i++)
+        (*champion)[len - 1]->regs[i] = 0;
+    (*champion)[len - 1]->cycle_to_wait = 0;
+    (*champion)[len - 1]->carry = 0;
 }
 
 int fork_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
 {
+    int *args = NULL;
+    instruct_types_t *types =
+        get_instruct_types(corewar->arena[champion[prog_nbr]->PC + 1]);
+
+    champion[prog_nbr]->current_PC = champion[prog_nbr]->PC;
+    if (!types)
+        return KO;
+    champion[prog_nbr]->cycle_to_wait += op_tab[FORK].nbr_cycles;
+    champion[prog_nbr]->PC += 1;
+    args = parse_parameter(corewar, types, FORK, champion);
+    if (!args)
+        return KO;
+    if (types[0] == DIRECT) {
+        dup_champ_fork(&champion, prog_nbr, champion[prog_nbr]->current_PC +
+            args[0] % IDX_MOD);
+    }
+    free(args);
     return OK;
 }
 
 int lfork(corewar_t *corewar, champion_t **champion, int prog_nbr)
 {
+    int *args = NULL;
+    instruct_types_t *types =
+        get_instruct_types(corewar->arena[champion[prog_nbr]->PC + 1]);
+
+    champion[prog_nbr]->current_PC = champion[prog_nbr]->PC;
+    if (!types)
+        return KO;
+    champion[prog_nbr]->cycle_to_wait += op_tab[LFORK].nbr_cycles;
+    champion[prog_nbr]->PC += 1;
+    args = parse_parameter(corewar, types, LFORK, champion);
+    if (!args)
+        return KO;
+    if (types[0] == DIRECT) {
+        dup_champ_fork(&champion, prog_nbr, champion[prog_nbr]->current_PC +
+            args[0]);
+    }
+    free(args);
     return OK;
 }
