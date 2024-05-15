@@ -12,15 +12,15 @@ static void loadchamp(champion_t **champions, uint8_t arena[])
     size_t size_in_arena = 0;
     size_t remaining_size = 0;
 
-    if ((*champions)->PC + (*champions)->prog_size > MEM_SIZE) {
-        size_in_arena = MEM_SIZE - (*champions)->PC;
-        my_memcpy(arena + (*champions)->PC,
+    if ((*champions)->pc + (*champions)->prog_size > MEM_SIZE) {
+        size_in_arena = MEM_SIZE - (*champions)->pc;
+        my_memcpy(arena + (*champions)->pc,
             (*champions)->instructions, size_in_arena);
         remaining_size = (*champions)->prog_size - size_in_arena;
         my_memcpy(arena, (*champions)->instructions + size_in_arena,
             remaining_size);
     } else {
-        my_memcpy(arena + (*champions)->PC,
+        my_memcpy(arena + (*champions)->pc,
             (*champions)->instructions, (*champions)->prog_size);
     }
 }
@@ -53,9 +53,9 @@ static void found_space(init_area_t *area)
 
 static void load_adress(corewar_t *corewar, int *i, init_area_t *area)
 {
-    if (corewar->champions[*i]->PC != -1) {
+    if (corewar->champions[*i]->pc != -1) {
         loadchamp(&corewar->champions[*i], corewar->arena);
-        area->current_address = corewar->champions[*i]->PC +
+        area->current_address = corewar->champions[*i]->pc +
             corewar->champions[*i]->prog_size;
     }
 }
@@ -63,8 +63,8 @@ static void load_adress(corewar_t *corewar, int *i, init_area_t *area)
 static void check_next_champ(corewar_t *corewar, init_area_t *area, int *i)
 {
     for (size_t j = *i + 1; corewar->champions[j] != NULL; j += 1) {
-        if (corewar->champions[j]->PC > area->current_address) {
-            area->next_address = corewar->champions[j]->PC + area->padding;
+        if (corewar->champions[j]->pc > area->current_address) {
+            area->next_address = corewar->champions[j]->pc + area->padding;
             area->check_space = true;
             break;
         }
@@ -74,11 +74,11 @@ static void check_next_champ(corewar_t *corewar, init_area_t *area, int *i)
 static void no_load_adress(corewar_t *corewar, init_area_t *area, int *i)
 {
     load_adress(corewar, i, area);
-    if (corewar->champions[*i]->PC == -1) {
+    if (corewar->champions[*i]->pc == -1) {
         area->check_space = false;
         check_next_champ(corewar, area, i);
         found_space(area);
-        corewar->champions[*i]->PC = area->next_address;
+        corewar->champions[*i]->pc = area->next_address;
         loadchamp(&corewar->champions[*i], corewar->arena);
         area->current_address = area->next_address +
             corewar->champions[*i]->prog_size;

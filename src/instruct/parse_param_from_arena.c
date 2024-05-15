@@ -34,58 +34,58 @@ static uint32_t check_direct_size(instruct_types_t *types,
     if (instruct == AND || instruct == OR || instruct == XOR)
         return DIR_SIZE;
     len = get_intstruct_length(types, instruct);
-    if (len > 7 || instruct == FORK || instruct == LFORK)
+    if (len > 7 || instruct == FORK || instruct == LFORK || instruct == ZJMP)
         return DIR_SIZE / 2;
     return DIR_SIZE;
 }
 
-static uint32_t get_register_value(corewar_t *corewar, instruct_types_t *types,
+static int get_register_value(corewar_t *corewar, instruct_types_t *types,
     champion_t **champion)
 {
     uint8_t reg = 0;
 
-    if (corewar->arena[(*champion)->PC] < 1 ||
-        corewar->arena[(*champion)->PC] > 16) {
+    if (corewar->arena[(*champion)->pc] < 1 ||
+        corewar->arena[(*champion)->pc] > 16) {
         *types = NO_MORE_TYPE;
         return reg;
     }
-    reg = (uint8_t)corewar->arena[(*champion)->PC];
-    (*champion)->PC = ((*champion)->PC + T_REG) % MEM_SIZE;
+    reg = (uint8_t)corewar->arena[(*champion)->pc];
+    (*champion)->pc = ((*champion)->pc + T_REG) % MEM_SIZE;
     if (reg > 16 || reg < 1)
         *types = NO_MORE_TYPE;
-    return (uint32_t)reg;
+    return (int)reg;
 }
 
-static uint32_t get_indirect_value(corewar_t *corewar, champion_t **champion)
+static int get_indirect_value(corewar_t *corewar, champion_t **champion)
 {
-    uint16_t *ind = NULL;
+    int16_t ind = 0;
 
-    if ((*champion)->PC + IND_SIZE < MEM_SIZE)
-        ind = (uint16_t *)my_uint8_ndup(&corewar->arena[(*champion)->PC],
-            IND_SIZE);
-    (*champion)->PC = ((*champion)->PC + IND_SIZE) % MEM_SIZE;
-    return (uint32_t)my_htons(*ind);
+    if ((*champion)->pc + IND_SIZE < MEM_SIZE)
+        ind = my_htons(*((int16_t *)my_uint8_ndup
+                        (&corewar->arena[(*champion)->pc], IND_SIZE)));
+    (*champion)->pc = ((*champion)->pc + IND_SIZE) % MEM_SIZE;
+    return ind;
 }
 
-static uint32_t get_direct_value(corewar_t *corewar, int param_size,
+static int get_direct_value(corewar_t *corewar, int param_size,
     champion_t **champion)
 {
-    uint16_t *short_dir = NULL;
-    uint32_t *int_dir = NULL;
+    short short_dir = 0;
+    int int_dir = 0;
 
-    if ((*champion)->PC + param_size < MEM_SIZE) {
+    if ((*champion)->pc + param_size < MEM_SIZE) {
         if (param_size == DIR_SIZE / 2) {
-            short_dir = (uint16_t *)my_uint8_ndup
-                (&corewar->arena[(*champion)->PC], param_size);
-            (*champion)->PC = ((*champion)->PC + param_size) % MEM_SIZE;
-            return (uint32_t)my_htons(*short_dir);
+            short_dir = my_htons(*((short *)my_uint8_ndup
+                (&corewar->arena[(*champion)->pc], param_size)));
+            (*champion)->pc = ((*champion)->pc + param_size) % MEM_SIZE;
+            return short_dir;
         } else {
-            int_dir = (uint32_t *)my_uint8_ndup
-                (&corewar->arena[(*champion)->PC], param_size);
+            int_dir = my_htonl(*((int *)my_uint8_ndup
+                (&corewar->arena[(*champion)->pc], param_size)));
         }
     }
-    (*champion)->PC = ((*champion)->PC + param_size) % MEM_SIZE;
-    return my_htonl(*int_dir);
+    (*champion)->pc = ((*champion)->pc + param_size) % MEM_SIZE;
+    return int_dir;
 }
 
 static int types_checker(corewar_t *corewar, instruct_types_t *types,
@@ -105,7 +105,6 @@ int *parse_parameter(corewar_t *corewar, instruct_types_t *types,
     int *args = malloc(sizeof(int) + op_tab[instruct].nbr_args);
     int direct_length = 0;
 
-    printf(" %s \n", (*champion)->prog_name);
     for (int i = 0; i < op_tab[instruct].nbr_args; i++) {
         if (types[i] == DIRECT) {
             direct_length = check_direct_size(types, instruct);
@@ -116,7 +115,6 @@ int *parse_parameter(corewar_t *corewar, instruct_types_t *types,
             free(args);
             return NULL;
         }
-        printf("args[%d] = %d\n", i, args[i]);
     }
     return args;
 }

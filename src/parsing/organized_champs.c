@@ -28,7 +28,7 @@ static int check_champions(champion_t **champions)
 
 int organized_champions(champion_t ***champions, int champs_nbr)
 {
-    int number = 0;
+    int number = 1;
 
     if (check_champions(*champions) == KO)
         return KO;

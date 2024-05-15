@@ -2,10 +2,11 @@
 ** EPITECH PROJECT, 2024
 ** B-CPE-200-BDX-2-1-corewar-florian.labadie
 ** File description:
-** arena
+** print_arena
 */
 
 #include "my.h"
+#include <ncurses.h>
 
 static int (*intructions[16])(corewar_t *, champion_t ***, int) = {
     live,
@@ -81,10 +82,32 @@ static void execute_champion(corewar_t *corewar)
     }
 }
 
+static void print_arena_in_real_time(corewar_t *corewar)
+{
+    int row = 0;
+    int col = 0;
+
+    clear();
+    for (int i = 0; i < MEM_SIZE; i++) {
+        mvprintw(row, col * 3, "%02x", (unsigned char)corewar->arena[i]);
+        col++;
+        if (col >= 80) {
+            col = 0;
+            row++;
+        }
+    }
+    refresh();
+    // usleep(50000);
+}
+
 int champion_arena(corewar_t *corewar)
 {
+    initscr();
+    cbreak();
+    noecho();
     while (is_alive(corewar->champions) == OK) {
         execute_champion(corewar);
+        print_arena_in_real_time(corewar);
     }
     for (int i = 0; corewar->champions[i] != NULL; i++) {
         if (corewar->champions[i]->is_alive == true) {
@@ -96,5 +119,6 @@ int champion_arena(corewar_t *corewar)
             break;
         }
     }
+    endwin();
     return OK;
 }

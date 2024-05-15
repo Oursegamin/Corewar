@@ -7,11 +7,14 @@
 
 MAIN =	 	main.c								\
 
+ARENA =		src/arena.c							\
+
+BONUS =		bonus/print_arena.c					\
+
 SRC =	 		src/error_handling.c				\
 				src/open_file.c						\
 				src/corewar.c						\
 				src/load_in_arena.c					\
-				src/arena.c							\
 
 PARSING	=		src/parsing/parsing.c					\
 				src/parsing/champion_parsing.c			\
@@ -30,11 +33,17 @@ INSTRUCTION	=	src/instruct/parse_instruct.c				\
 
 SRCTEST = 	tests/test.c								\
 
-OBJ =	$(MAIN:.c=.o) $(SRC:.c=.o) $(PARSING:.c=.o) $(INSTRUCTION:.c=.o)
+OBJ =	$(MAIN:.c=.o) $(ARENA:.c=.o) $(SRC:.c=.o) $(PARSING:.c=.o)\
+	$(INSTRUCTION:.c=.o)
 
 OBJTEST = $(SRCTEST:.c=.o)
 
+OBJBONUS =	$(MAIN:.c=.o) $(BONUS:.c=.o) $(SRC:.c=.o) $(PARSING:.c=.o)\
+	$(INSTRUCTION:.c=.o)
+
 NAME =		corewar
+
+NAMEBONUS =	corewar_bonus
 
 NAMETEST = 	unit_tests
 
@@ -52,6 +61,9 @@ all: buildlib $(NAME)
 
 $(NAME):	$(OBJ)
 	$(CC) $(LDFLAGS) -o $@ $(OBJ) $(LDLIBS)
+
+bonus:	buildlib $(OBJBONUS)
+	$(CC) $(LDFLAGS) -o $(NAMEBONUS) $(OBJBONUS) $(LDLIBS) -lncurses
 
 buildlib:
 	make -C ./lib/my

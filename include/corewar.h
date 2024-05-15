@@ -21,8 +21,8 @@ typedef struct champion_s {
     int prog_size;
     __uint8_t *instructions;
 
-    int PC;
-    int current_PC;
+    int pc;
+    int current_pc;
     __uint16_t regs[REG_NUMBER];
 
     int cycle_to_wait;

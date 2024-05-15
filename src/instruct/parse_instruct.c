@@ -24,7 +24,7 @@ static instruct_types_t *no_coding_bytes_types(instruct_types_t *types,
 }
 
 instruct_types_t *get_instruct_types(uint8_t coding_byte,
-    instruct_types_t *instruct)
+    instructions_t instruct)
 {
     int len = 0;
     instruct_types_t *types = malloc(sizeof(instruct_types_t) * (len + 1));

@@ -27,8 +27,8 @@ static int put_flag(char const *const *argv, champion_t **champion, int *i)
         return check_flag_validity((*champion)->prog_number, argv[*i + 1], i);
     }
     if (my_strcmp(argv[*i], "-a") == 0 && argv[*i + 1]) {
-        (*champion)->PC = my_getnbr(argv[*i + 1]) % MEM_SIZE;
-        return check_flag_validity((*champion)->PC, argv[*i + 1], i);
+        (*champion)->pc = my_getnbr(argv[*i + 1]) % MEM_SIZE;
+        return check_flag_validity((*champion)->pc, argv[*i + 1], i);
     }
     return -KO;
 }

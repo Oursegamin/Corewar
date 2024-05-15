@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-bool change_carry(champion_t **champion, int prog_nbr)
+bool change_carry(int value)
 {
-    return champion[prog_nbr]->carry == false ? true : false;
+    return value == 0 ? 1 : 0;
 }

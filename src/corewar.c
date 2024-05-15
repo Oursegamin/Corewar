@@ -37,7 +37,7 @@ static int malloc_champions(corewar_t **corewar, int prog_nbrs)
             (*corewar)->champions[i]->regs[j] = 0;
         (*corewar)->champions[i]->is_alive = true;
         (*corewar)->champions[i]->cycle_to_die = CYCLE_TO_DIE;
-        (*corewar)->champions[i]->PC = -1;
+        (*corewar)->champions[i]->pc = -1;
         (*corewar)->champions[i]->cycle_to_wait = 0;
         (*corewar)->champions[i]->prog_number = -1;
         (*corewar)->champions[i]->carry = false;
