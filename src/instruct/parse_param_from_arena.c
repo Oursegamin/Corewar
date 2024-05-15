@@ -34,7 +34,7 @@ static uint32_t check_direct_size(instruct_types_t *types,
     if (instruct == AND || instruct == OR || instruct == XOR)
         return DIR_SIZE;
     len = get_intstruct_length(types, instruct);
-    if (len > 7)
+    if (len > 7 || instruct == FORK || instruct == LFORK)
         return DIR_SIZE / 2;
     return DIR_SIZE;
 }
@@ -115,8 +115,7 @@ int *parse_parameter(corewar_t *corewar, instruct_types_t *types,
             free(args);
             return NULL;
         }
+        printf("args[%d] = %d\n", i, args[i]);
     }
     return args;
 }
-
-        // printf("args[%d] = %d\n", i, args[i]);

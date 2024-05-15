@@ -39,6 +39,15 @@ static int is_alive(champion_t **champion)
     return OK;
 }
 
+static int cycle_delta(corewar_t *corewar)
+{
+    int cycle_to_remove = CYCLE_DELTA * corewar->current_nbr_live / 40;
+
+    if (cycle_to_remove <= 0)
+        return 1;
+    return cycle_to_remove;
+}
+
 static void execute_champion(corewar_t *corewar)
 {
     for (int i = 0; corewar->champions[i] != NULL; i++) {
@@ -58,7 +67,7 @@ static void execute_champion(corewar_t *corewar)
             (corewar, corewar->champions, i) == KO) {
             corewar->champions[i]->is_alive = false;
         }
-        corewar->champions[i]->cycle_to_die -= 1;
+        corewar->champions[i]->cycle_to_die -= cycle_delta(corewar);
     }
 }
 
