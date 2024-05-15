@@ -61,6 +61,7 @@ static void execute_champion(corewar_t *corewar)
             corewar->champions[i]->cycle_to_wait -= 1;
             continue;
         }
+        // printf("%d", corewar->champions[i]->PC);
         if (corewar->arena[corewar->champions[i]->PC] > 16 ||
             corewar->arena[corewar->champions[i]->PC] < 1 ||
             intructions[corewar->arena[corewar->champions[i]->PC] - 1]

@@ -33,7 +33,7 @@ int st_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
         return KO;
     champion[prog_nbr]->cycle_to_wait += op_tab[ST].nbr_cycles;
     champion[prog_nbr]->PC += 2;
-    args = parse_parameter(corewar, types, ST, champion);
+    args = parse_parameter(corewar, types, ST, &champion[prog_nbr]);
     if (!args)
         return KO;
     if (types[1] == REGISTER)
@@ -58,7 +58,7 @@ int sti(corewar_t *corewar, champion_t **champion, int prog_nbr)
         return KO;
     champion[prog_nbr]->cycle_to_wait += op_tab[STI].nbr_cycles;
     champion[prog_nbr]->PC += 2;
-    args = parse_parameter(corewar, types, STI, champion);
+    args = parse_parameter(corewar, types, STI, &champion[prog_nbr]);
     if (!args)
         return KO;
     sti_loop(corewar, args, types, prog_nbr);
@@ -79,7 +79,7 @@ int aff(corewar_t *corewar, champion_t **champion, int prog_nbr)
         return KO;
     champion[prog_nbr]->cycle_to_wait += op_tab[AFF].nbr_cycles;
     champion[prog_nbr]->PC += 2;
-    args = parse_parameter(corewar, types, AFF, champion);
+    args = parse_parameter(corewar, types, AFF, &champion[prog_nbr]);
     if (!args)
         return KO;
     aff = corewar->champions[prog_nbr]->regs[args[0]] % (IDX_MOD / 2);

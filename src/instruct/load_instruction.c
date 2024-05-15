@@ -15,7 +15,7 @@ static int *ld_init(corewar_t *corewar, champion_t **champion,
     champion[prog_nbr]->cycle_to_wait += op_tab[LD].nbr_cycles;
     champion[prog_nbr]->PC += 2;
     champion[prog_nbr]->carry = change_carry(champion, prog_nbr);
-    return parse_parameter(corewar, types, LD, champion);
+    return parse_parameter(corewar, types, LD, &champion[prog_nbr]);
 }
 
 static int *lld_init(corewar_t *corewar, champion_t **champion,
@@ -26,7 +26,7 @@ static int *lld_init(corewar_t *corewar, champion_t **champion,
     champion[prog_nbr]->cycle_to_wait += op_tab[LLD].nbr_cycles;
     champion[prog_nbr]->PC += 2;
     champion[prog_nbr]->carry = change_carry(champion, prog_nbr);
-    return parse_parameter(corewar, types, LLD, champion);
+    return parse_parameter(corewar, types, LLD, &champion[prog_nbr]);
 }
 
 int ld_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
@@ -107,7 +107,7 @@ int ldi(corewar_t *corewar, champion_t **champion, int prog_nbr)
     champion[prog_nbr]->cycle_to_wait += op_tab[LDI].nbr_cycles;
     champion[prog_nbr]->PC += 2;
     champion[prog_nbr]->carry = change_carry(champion, prog_nbr);
-    args = parse_parameter(corewar, types, LDI, champion);
+    args = parse_parameter(corewar, types, LDI, &champion[prog_nbr]);
     if (!args)
         return KO;
     ldi_loop(corewar, args, types, prog_nbr);
@@ -148,7 +148,7 @@ int lldi(corewar_t *corewar, champion_t **champion, int prog_nbr)
     champion[prog_nbr]->cycle_to_wait += op_tab[LLDI].nbr_cycles;
     champion[prog_nbr]->PC += 2;
     champion[prog_nbr]->carry = change_carry(champion, prog_nbr);
-    args = parse_parameter(corewar, types, LLDI, champion);
+    args = parse_parameter(corewar, types, LLDI, &champion[prog_nbr]);
     if (!args)
         return KO;
     lldi_loop(corewar, args, types, prog_nbr);

@@ -37,7 +37,7 @@ int add(corewar_t *corewar, champion_t **champion, int prog_nbr)
     champion[prog_nbr]->PC += 2;
     champion[prog_nbr]->carry =
         champion[prog_nbr]->carry == false ? true : false;
-    args = parse_parameter(corewar, types, ADD, champion);
+    args = parse_parameter(corewar, types, ADD, &champion[prog_nbr]);
     if (!args)
         return KO;
     champion[prog_nbr]->regs[args[2]] = champion[prog_nbr]->regs[args[0]] +
@@ -57,7 +57,7 @@ int sub(corewar_t *corewar, champion_t **champion, int prog_nbr)
         return KO;
     champion[prog_nbr]->cycle_to_wait += op_tab[SUB].nbr_cycles;
     champion[prog_nbr]->PC += 2;
-    args = parse_parameter(corewar, types, SUB, champion);
+    args = parse_parameter(corewar, types, SUB, &champion[prog_nbr]);
     if (!args)
         return KO;
     champion[prog_nbr]->regs[args[2]] = champion[prog_nbr]->regs[args[0]] -
@@ -80,7 +80,7 @@ int and_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
     champion[prog_nbr]->PC += 2;
     champion[prog_nbr]->carry =
         champion[prog_nbr]->carry == false ? true : false;
-    args = parse_parameter(corewar, types, AND, champion);
+    args = parse_parameter(corewar, types, AND, &champion[prog_nbr]);
     if (!args)
         return KO;
     load = get_value_loop(corewar, args, types, prog_nbr);
@@ -102,7 +102,7 @@ int or_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
         return KO;
     champion[prog_nbr]->cycle_to_wait += op_tab[OR].nbr_cycles;
     champion[prog_nbr]->PC += 2;
-    args = parse_parameter(corewar, types, OR, champion);
+    args = parse_parameter(corewar, types, OR, &champion[prog_nbr]);
     if (!args)
         return KO;
     load = get_value_loop(corewar, args, types, prog_nbr);
@@ -124,7 +124,7 @@ int xor_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
         return KO;
     champion[prog_nbr]->cycle_to_wait += op_tab[XOR].nbr_cycles;
     champion[prog_nbr]->PC += 2;
-    args = parse_parameter(corewar, types, XOR, champion);
+    args = parse_parameter(corewar, types, XOR, &champion[prog_nbr]);
     if (!args)
         return KO;
     load = get_value_loop(corewar, args, types, prog_nbr);

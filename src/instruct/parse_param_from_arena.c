@@ -105,6 +105,7 @@ int *parse_parameter(corewar_t *corewar, instruct_types_t *types,
     int *args = malloc(sizeof(int) + op_tab[instruct].nbr_args);
     int direct_length = 0;
 
+    printf(" %s \n", (*champion)->prog_name);
     for (int i = 0; i < op_tab[instruct].nbr_args; i++) {
         if (types[i] == DIRECT) {
             direct_length = check_direct_size(types, instruct);
@@ -113,7 +114,6 @@ int *parse_parameter(corewar_t *corewar, instruct_types_t *types,
             args[i] = types_checker(corewar, &types[i], champion);
         if (types[i] == NO_MORE_TYPE) {
             free(args);
-    free(types);
             return NULL;
         }
         printf("args[%d] = %d\n", i, args[i]);

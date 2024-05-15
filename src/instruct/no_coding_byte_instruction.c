@@ -72,7 +72,7 @@ int zjmp(corewar_t *corewar, champion_t **champion, int prog_nbr)
         return KO;
     champion[prog_nbr]->cycle_to_wait += op_tab[ZJMP].nbr_cycles;
     champion[prog_nbr]->PC += 1;
-    args = parse_parameter(corewar, types, ZJMP, champion);
+    args = parse_parameter(corewar, types, ZJMP, &champion[prog_nbr]);
     if (!args)
         return KO;
     if (champion[prog_nbr]->carry == 1 && types[0] == DIRECT)
@@ -94,7 +94,7 @@ int fork_i(corewar_t *corewar, champion_t **champion, int prog_nbr)
         return KO;
     champion[prog_nbr]->cycle_to_wait += op_tab[FORK].nbr_cycles;
     champion[prog_nbr]->PC += 1;
-    args = parse_parameter(corewar, types, FORK, champion);
+    args = parse_parameter(corewar, types, FORK, &champion[prog_nbr]);
     if (!args)
         return KO;
     if (types[0] == DIRECT) {
@@ -117,7 +117,7 @@ int lfork(corewar_t *corewar, champion_t **champion, int prog_nbr)
         return KO;
     champion[prog_nbr]->cycle_to_wait += op_tab[LFORK].nbr_cycles;
     champion[prog_nbr]->PC += 1;
-    args = parse_parameter(corewar, types, LFORK, champion);
+    args = parse_parameter(corewar, types, LFORK, &champion[prog_nbr]);
     if (!args)
         return KO;
     if (types[0] == DIRECT) {
