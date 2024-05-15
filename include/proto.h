@@ -21,7 +21,8 @@ int champion_arena(corewar_t *corewar);
 bool change_carry(champion_t **champion, int prog_nbr);
 
 // INSTRUCTIONS
-instruct_types_t *get_instruct_types(uint8_t coding_byte);
+instruct_types_t *get_instruct_types(uint8_t coding_byte,
+    instruct_types_t *instruct);
 int live(corewar_t *corewar, champion_t **champion, int prog_nbr);
 int zjmp(corewar_t *corewar, champion_t **champion, int prog_nbr);
 int fork_i(corewar_t *corewar, champion_t **champion, int prog_nbrr);
