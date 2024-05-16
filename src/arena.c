@@ -77,11 +77,11 @@ static void print_champs_status(corewar_t *corewar)
 
 static int cycle_delta(corewar_t *corewar)
 {
-    int cycle_to_remove = CYCLE_DELTA * corewar->current_nbr_live / 40;
-
-    if (cycle_to_remove <= 0)
-        return 1;
-    return cycle_to_remove;
+    if (corewar->current_nbr_live == 40) {
+        corewar->current_nbr_live = 0;
+        return CYCLE_DELTA;
+    }
+    return 0;
 }
 
 static void execute_champion(corewar_t *corewar)
