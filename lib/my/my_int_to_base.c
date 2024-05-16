@@ -11,7 +11,7 @@ void alpha(int a, char *str, int *i)
 {
     if (a > 9) {
         a = a - 10;
-        str[*i] = a + 97;
+        str[*i] = a + 'A';
     }
 }
 

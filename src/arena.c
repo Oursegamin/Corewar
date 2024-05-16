@@ -63,22 +63,15 @@ static void end_game(champion_t **champion, int dump_stop)
     }
 }
 
-static void print_champs_status(champion_t **champion)
+static void print_champs_status(corewar_t *corewar)
 {
-    for (int i = 0; champion[i] != NULL; i++) {
-        if (champion[i]->is_alive == true) {
-            my_putstr("The player ");
-            my_putnbr(champion[i]->prog_number);
-            my_putchar('(');
-            my_putstr(champion[i]->prog_name);
-            my_putstr(")is alive.\n");
-        } else {
-            my_putstr("The player ");
-            my_putnbr(champion[i]->prog_number);
-            my_putchar('(');
-            my_putstr(champion[i]->prog_name);
-            my_putstr(")is not alive.\n");
-        }
+    for (int i = 0; i < MEM_SIZE; i++) {
+        if (corewar->arena[i] < 16)
+            my_putchar('0');
+        my_putstr(my_int_to_base(corewar->arena[i], 16));
+        my_putchar(' ');
+        if ((i + 1) % 32 == 0)
+            my_putchar('\n');
     }
 }
 
@@ -122,7 +115,7 @@ int champion_arena(corewar_t *corewar)
         execute_champion(corewar);
         corewar->nbr_of_cycles += 1;
         if (corewar->nbr_of_cycles == corewar->dump) {
-            print_champs_status(corewar->champions);
+            print_champs_status(corewar);
             dump_stop = 1;
             break;
         }
