@@ -88,6 +88,7 @@ clean:
 
 fclean: clean cleantest
 	rm -f $(NAME)
+	rm -f $(NAMEBONUS)
 	make fclean -C ./lib/my
 
 cleantest:

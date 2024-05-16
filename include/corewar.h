@@ -21,6 +21,7 @@ typedef struct champion_s {
     int prog_size;
     __uint8_t *instructions;
 
+    int load_address;
     int pc;
     int current_pc;
     __uint16_t regs[REG_NUMBER];
@@ -35,6 +36,7 @@ typedef struct corewar_s {
 
     int dump;
     int champs_nbr;
+    int nbr_of_cycles;
 
     int current_nbr_live;
 

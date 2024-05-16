@@ -95,7 +95,9 @@ int load_in_arena(corewar_t *corewar)
     area->next_address = 0;
     if (area->padding == -KO || !area)
         return KO;
-    for (int i = 0; corewar->champions[i] != NULL; i += 1)
+    for (int i = 0; corewar->champions[i] != NULL; i += 1) {
         no_load_adress(corewar, area, &i);
+        corewar->champions[i]->load_address = corewar->champions[i]->pc;
+    }
     return OK;
 }

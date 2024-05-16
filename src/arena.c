@@ -49,6 +49,39 @@ static int is_alive(champion_t **champion)
     return OK;
 }
 
+static void end_game(champion_t **champion, int dump_stop)
+{
+    for (int i = 0; dump_stop == 0 && champion[i] != NULL; i++) {
+        if (champion[i]->is_alive == true) {
+            my_putstr("The player ");
+            my_putnbr(champion[i]->prog_number);
+            my_putchar('(');
+            my_putstr(champion[i]->prog_name);
+            my_putstr(")has won.\n");
+            break;
+        }
+    }
+}
+
+static void print_champs_status(champion_t **champion)
+{
+    for (int i = 0; champion[i] != NULL; i++) {
+        if (champion[i]->is_alive == true) {
+            my_putstr("The player ");
+            my_putnbr(champion[i]->prog_number);
+            my_putchar('(');
+            my_putstr(champion[i]->prog_name);
+            my_putstr(")is alive.\n");
+        } else {
+            my_putstr("The player ");
+            my_putnbr(champion[i]->prog_number);
+            my_putchar('(');
+            my_putstr(champion[i]->prog_name);
+            my_putstr(")is not alive.\n");
+        }
+    }
+}
+
 static int cycle_delta(corewar_t *corewar)
 {
     int cycle_to_remove = CYCLE_DELTA * corewar->current_nbr_live / 40;
@@ -83,18 +116,17 @@ static void execute_champion(corewar_t *corewar)
 
 int champion_arena(corewar_t *corewar)
 {
+    int dump_stop = 0;
+
     while (is_alive(corewar->champions) == OK) {
         execute_champion(corewar);
-    }
-    for (int i = 0; corewar->champions[i] != NULL; i++) {
-        if (corewar->champions[i]->is_alive == true) {
-            my_putstr("The player ");
-            my_putnbr(corewar->champions[i]->prog_number);
-            my_putchar('(');
-            my_putstr(corewar->champions[i]->prog_name);
-            my_putstr(")has won.\n");
+        corewar->nbr_of_cycles += 1;
+        if (corewar->nbr_of_cycles == corewar->dump) {
+            print_champs_status(corewar->champions);
+            dump_stop = 1;
             break;
         }
     }
+    end_game(corewar->champions, dump_stop);
     return OK;
 }

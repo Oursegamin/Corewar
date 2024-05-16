@@ -11,6 +11,7 @@ static void sti_loop(corewar_t *corewar, int *args,
     instruct_types_t *types, int prog_nbr)
 {
     int load = 0;
+    uint32_t reg_value = 0;
 
     for (int i = 1; i < 3; i += 1) {
         if (types[i] == REGISTER)
@@ -18,19 +19,24 @@ static void sti_loop(corewar_t *corewar, int *args,
         if (types[i] == DIRECT || types[i] == INDIRECT)
             load += args[i];
     }
-    corewar->arena[corewar->champions[prog_nbr]->current_pc +
-            load % IDX_MOD] = corewar->champions[prog_nbr]->regs[args[0] - 1];
+    reg_value = my_htonl(corewar->champions[prog_nbr]->regs[args[0] - 1]);
+    my_memcpy(&(corewar->arena[corewar->champions[prog_nbr]->current_pc +
+            load % IDX_MOD]), &reg_value, REG_SIZE);
 }
 
 static void st_args(corewar_t *corewar, champion_t **champion,
     int *args, instruct_types_t *types)
 {
+    uint32_t reg_value = 0;
+
     if (types[1] == REGISTER)
         (*champion)->regs[args[1] - 1] =
             (*champion)->regs[args[0] - 1];
-    if (types[1] == INDIRECT)
-        corewar->arena[(*champion)->current_pc +
-            args[1] % IDX_MOD] = (*champion)->regs[args[0] - 1];
+    if (types[1] == INDIRECT) {
+        reg_value = my_htonl((*champion)->regs[args[0] - 1]);
+        my_memcpy(&(corewar->arena[(*champion)->current_pc +
+            args[1] % IDX_MOD]), &reg_value, REG_SIZE);
+    }
 }
 
 int st_i(corewar_t *corewar, champion_t ***champion, int prog_nbr)

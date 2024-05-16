@@ -28,7 +28,7 @@ static void init_new_champ(champion_t ***champion, int prog_nbr,
     (*champion)[len - 1]->instructions = NULL;
     (*champion)[len - 1]->pc = pc;
     (*champion)[len - 1]->current_pc = pc;
-    for (int i = 1; i < REG_NUMBER; i++)
+    for (int i = 0; i < REG_NUMBER; i++)
         (*champion)[len - 1]->regs[i] = (*champion)[prog_nbr]->regs[i];
     (*champion)[len - 1]->cycle_to_wait = (*champion)[prog_nbr]->cycle_to_wait;
     (*champion)[len - 1]->carry = 0;
@@ -111,7 +111,7 @@ int fork_i(corewar_t *corewar, champion_t ***champion, int prog_nbr)
         return KO;
     if (types[0] == DIRECT && dup_champ_fork(champion, prog_nbr,
         (*champion)[prog_nbr]->current_pc + args[0] % IDX_MOD) == KO) {
-    free(args);
+        free(args);
         return KO;
     }
     free(args);
