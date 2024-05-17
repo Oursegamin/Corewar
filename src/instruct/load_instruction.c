@@ -42,9 +42,8 @@ int ld_i(corewar_t *corewar, champion_t ***champion, int prog_nbr)
     if (types[0] == DIRECT) {
         load = args[0];
     } else if (types[0] == INDIRECT)
-        load = *((int *)my_uint8_ndup
-            (corewar->arena, (*champion)[prog_nbr]->current_pc + args[0]
-            % IDX_MOD, REG_SIZE));
+        load = *((int *)my_uint8_ndup(corewar->arena,
+            (*champion)[prog_nbr]->current_pc + args[0] % IDX_MOD, REG_SIZE));
     (*champion)[prog_nbr]->regs[args[1] - 1] = load;
     (*champion)[prog_nbr]->carry =
         change_carry((*champion)[prog_nbr]->regs[args[1] - 1]);
@@ -67,9 +66,8 @@ int lld(corewar_t *corewar, champion_t ***champion, int prog_nbr)
     if (types[0] == DIRECT) {
         load = args[0];
     } else if (types[0] == INDIRECT)
-        load = *((int *)my_uint8_ndup
-            (corewar->arena, (*champion)[prog_nbr]->current_pc + args[0],
-            REG_SIZE));
+        load = *((int *)my_uint8_ndup(corewar->arena,
+            (*champion)[prog_nbr]->current_pc + args[0], REG_SIZE));
     (*champion)[prog_nbr]->regs[args[1] - 1] = load;
     (*champion)[prog_nbr]->carry =
         change_carry((*champion)[prog_nbr]->regs[args[1] - 1]);

@@ -81,7 +81,7 @@ static int get_direct_value(corewar_t *corewar, int param_size,
             return short_dir;
         } else {
             int_dir = my_htonl(*((int *)my_uint8_ndup
-                (corewar->arena ,(*champion)->pc, param_size)));
+                (corewar->arena, (*champion)->pc, param_size)));
         }
     }
     (*champion)->pc = ((*champion)->pc + param_size) % MEM_SIZE;
