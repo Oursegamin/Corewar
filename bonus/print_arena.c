@@ -120,20 +120,27 @@ static void initialize_colors(corewar_t *corewar)
 {
     int j = 0;
 
-    for (; corewar->champions[j] != NULL; j++) {
-        init_pair(j + 1, COLOR_GREEN + j, COLOR_BLACK);
+    for (; j < corewar->champs_nbr; j++) {
+        init_pair(corewar->champions[j]->prog_number, COLOR_GREEN +
+            (corewar->champions[j]->prog_number - 1), COLOR_BLACK);
     }
-    init_pair(10, j + 1, COLOR_WHITE);
-    init_pair(11, j + 1, COLOR_RED);
+    init_pair(10, COLOR_MAGENTA, COLOR_WHITE);
+    init_pair(11, COLOR_WHITE, COLOR_RED);
 }
 
-static void set_colors(corewar_t *corewar, int *i, int *color)
+static void set_colors(corewar_t *corewar, int *i, int *color, int *size)
 {
     for (int j = 0; corewar->champions[j] != NULL; j++) {
-        if (*i >= corewar->champions[j]->load_address &&
+        if (corewar->champions[j]->load_address +
+            corewar->champions[j]->prog_size > MEM_SIZE) {
+            *size = (corewar->champions[j]->load_address +
+                corewar->champions[j]->prog_size) - MEM_SIZE;
+        } else
+            *size = 0;
+        if ((j < corewar->champs_nbr && (*i >= corewar->champions[j]->load_address &&
             *i < corewar->champions[j]->load_address +
-            corewar->champions[j]->prog_size) {
-            *color = j + 1;
+            corewar->champions[j]->prog_size)) || *i < *size) {
+            *color = corewar->champions[j]->prog_number;
         }
         if (*i == corewar->champions[j]->pc && corewar->champions[j]->is_alive == true)
             *color = 10;
@@ -145,13 +152,14 @@ static void set_colors(corewar_t *corewar, int *i, int *color)
 static void print_arena_in_real_time(corewar_t *corewar)
 {
     int color = 0;
+    int size = 0;
 
     clear();
     mvprintw(0, (COLS - 15) / 2, "Cycle count: %d", corewar->nbr_of_cycles);
     mvprintw(1, 0, "\n");
     for (int i = 0; i < MEM_SIZE; i++) {
         color = 0;
-        set_colors(corewar, &i, &color);
+        set_colors(corewar, &i, &color, &size);
         if (color) {
             attron(COLOR_PAIR(color));
             mvprintw(i / 90 + 2, (i % 90) * 3, "%02X", corewar->arena[i]);

@@ -27,11 +27,12 @@ static void init_new_champ(champion_t ***champion, int prog_nbr,
     (*champion)[len - 1]->prog_size = (*champion)[prog_nbr]->prog_size;
     (*champion)[len - 1]->instructions = NULL;
     (*champion)[len - 1]->pc = pc;
+    (*champion)[len - 1]->load_address = (*champion)[prog_nbr]->load_address;
     (*champion)[len - 1]->current_pc = pc;
     for (int i = 0; i < REG_NUMBER; i++)
         (*champion)[len - 1]->regs[i] = (*champion)[prog_nbr]->regs[i];
     (*champion)[len - 1]->cycle_to_wait = (*champion)[prog_nbr]->cycle_to_wait;
-    (*champion)[len - 1]->carry = 0;
+    (*champion)[len - 1]->carry = (*champion)[prog_nbr]->carry;
 }
 
 static int dup_champ_fork(champion_t ***champion, int prog_nbr, int pc)

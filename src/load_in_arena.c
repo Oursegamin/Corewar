@@ -78,7 +78,7 @@ static void no_load_adress(corewar_t *corewar, init_area_t *area, int *i)
         area->check_space = false;
         check_next_champ(corewar, area, i);
         found_space(area);
-        corewar->champions[*i]->pc = area->next_address;
+        corewar->champions[*i]->pc = area->next_address % MEM_SIZE;
         loadchamp(&corewar->champions[*i], corewar->arena);
         area->current_address = area->next_address +
             corewar->champions[*i]->prog_size;
