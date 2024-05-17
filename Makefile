@@ -28,7 +28,9 @@ INSTRUCTION	=	src/instruct/parse_instruct.c				\
 				src/instruct/load_instruction.c				\
 				src/instruct/no_coding_byte_instruction.c	\
 				src/instruct/parse_param_from_arena.c		\
-				src/instruct/change_carry.c		\
+				src/instruct/my_uint8_ndup.c				\
+				src/instruct/my_corcpy.c					\
+				src/instruct/change_carry.c					\
 
 
 SRCTEST = 	tests/test.c								\

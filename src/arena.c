@@ -89,7 +89,7 @@ static void execute_champion(corewar_t *corewar)
     for (int i = 0; corewar->champions[i] != NULL; i++) {
         if (is_alive(corewar->champions) == KO)
             break;
-        if (corewar->champions[i]->cycle_to_die <= 0)
+        if (corewar->champions[i]->cycle_to_die >= corewar->cycle_to_die)
             corewar->champions[i]->is_alive = false;
         if (!corewar->champions[i]->is_alive)
             continue;
@@ -103,7 +103,8 @@ static void execute_champion(corewar_t *corewar)
             (corewar, &corewar->champions, i) == KO) {
             corewar->champions[i]->pc += 1;
         }
-        corewar->champions[i]->cycle_to_die -= cycle_delta(corewar);
+        corewar->champions[i]->cycle_to_die += 1;
+        corewar->cycle_to_die -= cycle_delta(corewar);
     }
 }
 

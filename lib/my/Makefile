@@ -30,7 +30,6 @@ SRC     =	my_putchar.c			\
 			my_hton.c				\
 			my_memcpy.c				\
 			my_swap.c				\
-			my_uint8_ndup.c			\
 			my_int_to_base.c		\
 
 OBJ     =	$(SRC:.c=.o)

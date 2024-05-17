@@ -37,6 +37,7 @@ typedef struct corewar_s {
     int dump;
     int champs_nbr;
     int nbr_of_cycles;
+    int cycle_to_die;
 
     int current_nbr_live;
 

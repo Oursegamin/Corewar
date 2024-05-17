@@ -86,11 +86,11 @@ static void print_champs_status(champion_t **champion)
 
 static int cycle_delta(corewar_t *corewar)
 {
-    int cycle_to_remove = CYCLE_DELTA * corewar->current_nbr_live / 40;
-
-    if (cycle_to_remove <= 0)
-        return 1;
-    return cycle_to_remove;
+    if (corewar->current_nbr_live == 40) {
+        corewar->current_nbr_live = 0;
+        return CYCLE_DELTA;
+    }
+    return 0;
 }
 
 static void execute_champion(corewar_t *corewar)
@@ -98,7 +98,7 @@ static void execute_champion(corewar_t *corewar)
     for (int i = 0; corewar->champions[i] != NULL; i++) {
         if (is_alive(corewar->champions) == KO)
             break;
-        if (corewar->champions[i]->cycle_to_die <= 0)
+        if (corewar->champions[i]->cycle_to_die >= corewar->cycle_to_die)
             corewar->champions[i]->is_alive = false;
         if (!corewar->champions[i]->is_alive)
             continue;
@@ -112,7 +112,8 @@ static void execute_champion(corewar_t *corewar)
             (corewar, &corewar->champions, i) == KO) {
             corewar->champions[i]->pc += 1;
         }
-        corewar->champions[i]->cycle_to_die -= cycle_delta(corewar);
+        corewar->champions[i]->cycle_to_die += 1;
+        corewar->cycle_to_die -= cycle_delta(corewar);
     }
 }
 
@@ -156,7 +157,7 @@ static void print_arena_in_real_time(corewar_t *corewar)
 
     clear();
     mvprintw(0, (COLS - 15) / 2, "Cycle count: %d", corewar->nbr_of_cycles);
-    mvprintw(1, 0, "\n");
+    mvprintw(1, (COLS - 15) / 2, "Cycle to die: %d", corewar->cycle_to_die);
     for (int i = 0; i < MEM_SIZE; i++) {
         color = 0;
         set_colors(corewar, &i, &color, &size);
@@ -169,7 +170,7 @@ static void print_arena_in_real_time(corewar_t *corewar)
         }
     }
     refresh();
-    usleep(100000); 
+    usleep(10000);
 }
 
 

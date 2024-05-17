@@ -62,7 +62,7 @@ static int get_indirect_value(corewar_t *corewar, champion_t **champion)
 
     if ((*champion)->pc + IND_SIZE < MEM_SIZE)
         ind = my_htons(*((int16_t *)my_uint8_ndup
-                        (&corewar->arena[(*champion)->pc], IND_SIZE)));
+                        (corewar->arena, (*champion)->pc, IND_SIZE)));
     (*champion)->pc = ((*champion)->pc + IND_SIZE) % MEM_SIZE;
     return ind;
 }
@@ -76,12 +76,12 @@ static int get_direct_value(corewar_t *corewar, int param_size,
     if ((*champion)->pc + param_size < MEM_SIZE) {
         if (param_size == DIR_SIZE / 2) {
             short_dir = my_htons(*((short *)my_uint8_ndup
-                (&corewar->arena[(*champion)->pc], param_size)));
+                (corewar->arena, (*champion)->pc, param_size)));
             (*champion)->pc = ((*champion)->pc + param_size) % MEM_SIZE;
             return short_dir;
         } else {
             int_dir = my_htonl(*((int *)my_uint8_ndup
-                (&corewar->arena[(*champion)->pc], param_size)));
+                (corewar->arena ,(*champion)->pc, param_size)));
         }
     }
     (*champion)->pc = ((*champion)->pc + param_size) % MEM_SIZE;

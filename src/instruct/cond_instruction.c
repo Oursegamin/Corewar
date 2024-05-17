@@ -19,8 +19,8 @@ static uint32_t *get_value_loop(corewar_t *corewar, int *args,
             load[i] = args[i];
         if (types[i] == INDIRECT)
             load[i] = *((uint32_t *)my_uint8_ndup
-            (&corewar->arena[corewar->champions[prog_nbr]->current_pc +
-            args[i] % IDX_MOD], REG_SIZE));
+            (corewar->arena, corewar->champions[prog_nbr]->current_pc +
+            args[i] % IDX_MOD, REG_SIZE));
     }
     return load;
 }
@@ -29,12 +29,13 @@ int add(corewar_t *corewar, champion_t ***champion, int prog_nbr)
 {
     int *args = NULL;
     instruct_types_t *types =
-        get_instruct_types(corewar->arena[(*champion)[prog_nbr]->pc + 1], ADD);
+        get_instruct_types(corewar->arena[
+            ((*champion)[prog_nbr]->pc + 1) % MEM_SIZE], ADD);
 
     if (!types)
         return KO;
     (*champion)[prog_nbr]->cycle_to_wait += op_tab[ADD].nbr_cycles;
-    (*champion)[prog_nbr]->pc += 2;
+    (*champion)[prog_nbr]->pc = ((*champion)[prog_nbr]->pc + 2) % MEM_SIZE;
     args = parse_parameter(corewar, types, ADD, &(*champion)[prog_nbr]);
     if (!args)
         return KO;
@@ -52,12 +53,13 @@ int sub(corewar_t *corewar, champion_t ***champion, int prog_nbr)
 {
     int *args = NULL;
     instruct_types_t *types =
-        get_instruct_types(corewar->arena[(*champion)[prog_nbr]->pc + 1], SUB);
+        get_instruct_types(corewar->arena[
+            ((*champion)[prog_nbr]->pc + 1) % MEM_SIZE], SUB);
 
     if (!types)
         return KO;
     (*champion)[prog_nbr]->cycle_to_wait += op_tab[SUB].nbr_cycles;
-    (*champion)[prog_nbr]->pc += 2;
+    (*champion)[prog_nbr]->pc = ((*champion)[prog_nbr]->pc + 2) % MEM_SIZE;
     args = parse_parameter(corewar, types, SUB, &(*champion)[prog_nbr]);
     if (!args)
         return KO;
@@ -73,13 +75,14 @@ int and_i(corewar_t *corewar, champion_t ***champion, int prog_nbr)
 {
     int *args = NULL;
     instruct_types_t *types =
-        get_instruct_types(corewar->arena[(*champion)[prog_nbr]->pc + 1], AND);
+        get_instruct_types(corewar->arena[
+            ((*champion)[prog_nbr]->pc + 1) % MEM_SIZE], AND);
     uint32_t *load = {0};
 
     if (!types)
         return KO;
     (*champion)[prog_nbr]->cycle_to_wait += op_tab[AND].nbr_cycles;
-    (*champion)[prog_nbr]->pc += 2;
+    (*champion)[prog_nbr]->pc = ((*champion)[prog_nbr]->pc + 2) % MEM_SIZE;
     args = parse_parameter(corewar, types, AND, &(*champion)[prog_nbr]);
     if (!args)
         return KO;
@@ -97,13 +100,14 @@ int or_i(corewar_t *corewar, champion_t ***champion, int prog_nbr)
 {
     int *args = NULL;
     instruct_types_t *types =
-        get_instruct_types(corewar->arena[(*champion)[prog_nbr]->pc + 1], OR);
+        get_instruct_types(corewar->arena[
+            ((*champion)[prog_nbr]->pc + 1) % MEM_SIZE], OR);
     uint32_t *load = {0};
 
     if (!types)
         return KO;
     (*champion)[prog_nbr]->cycle_to_wait += op_tab[OR].nbr_cycles;
-    (*champion)[prog_nbr]->pc += 2;
+    (*champion)[prog_nbr]->pc = ((*champion)[prog_nbr]->pc + 2) % MEM_SIZE;
     args = parse_parameter(corewar, types, OR, &(*champion)[prog_nbr]);
     if (!args)
         return KO;
@@ -119,13 +123,14 @@ int xor_i(corewar_t *corewar, champion_t ***champion, int prog_nbr)
 {
     int *args = NULL;
     instruct_types_t *types =
-        get_instruct_types(corewar->arena[(*champion)[prog_nbr]->pc + 1], XOR);
+        get_instruct_types(corewar->arena[
+            ((*champion)[prog_nbr]->pc + 1) % MEM_SIZE], XOR);
     uint32_t *load = {0};
 
     if (!types)
         return KO;
     (*champion)[prog_nbr]->cycle_to_wait += op_tab[XOR].nbr_cycles;
-    (*champion)[prog_nbr]->pc += 2;
+    (*champion)[prog_nbr]->pc = ((*champion)[prog_nbr]->pc + 2) % MEM_SIZE;
     args = parse_parameter(corewar, types, XOR, &(*champion)[prog_nbr]);
     if (!args)
         return KO;

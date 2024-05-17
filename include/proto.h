@@ -43,5 +43,7 @@ int aff(corewar_t *corewar, champion_t ***champion, int prog_nbr);
 // INSTRUCTIONS PARSING
 int *parse_parameter(corewar_t *corewar, instruct_types_t *types,
     instructions_t instruct, champion_t **champion);
+uint8_t *my_uint8_ndup(uint8_t *arena, int pc, int size);
+void my_corcpy(uint8_t arena[][MEM_SIZE], int pc, uint8_t *value, int size);
 
 #endif /* !PROTO_H_ */
