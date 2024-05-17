@@ -10,7 +10,7 @@
 static uint32_t *get_value_loop(corewar_t *corewar, int *args,
     instruct_types_t *types, int prog_nbr)
 {
-    uint32_t *load = {0};
+    uint32_t *load = malloc(sizeof(uint32_t) * 2);
 
     for (int i = 0; i < 2; i += 1) {
         if (types[i] == REGISTER)

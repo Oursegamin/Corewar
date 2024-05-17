@@ -30,7 +30,7 @@ static int (*intructions[16])(corewar_t *, champion_t ***, int) = {
 static int check_already_alive(champion_t **champion, int prog_nbr, int i)
 {
     for (int j = i - 1; j >= 0; j--) {
-        if (champion[j]->prog_number == prog_nbr)
+        if (champion[j]->is_alive && champion[j]->prog_number == prog_nbr)
             return OK;
     }
     return KO;
@@ -193,6 +193,8 @@ int champion_arena(corewar_t *corewar)
             break;
         }
     }
+    print_arena_in_real_time(corewar);
+    usleep(1000000);
     endwin();
     end_game(corewar->champions, dump_stop);
     return OK;
