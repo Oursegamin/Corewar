@@ -78,7 +78,7 @@ int lld(corewar_t *corewar, champion_t ***champion, int prog_nbr)
 static void ldi_loop(corewar_t *corewar, int *args,
     instruct_types_t *types, int prog_nbr)
 {
-    int *load = {0};
+    int *load = malloc(sizeof(int) * 2);
 
     for (int i = 0; i < 2; i += 1) {
         if (types[i] == REGISTER)
@@ -121,22 +121,21 @@ int ldi(corewar_t *corewar, champion_t ***champion, int prog_nbr)
 static void lldi_loop(corewar_t *corewar, int *args,
     instruct_types_t *types, int prog_nbr)
 {
-    int *load = {0};
+    int load = 0;
 
     for (int i = 0; i < 2; i += 1) {
         if (types[i] == REGISTER)
-            *load += corewar->champions[prog_nbr]->regs[args[i] - 1];
+            load += corewar->champions[prog_nbr]->regs[args[i] - 1];
         if (types[i] == DIRECT)
-            *load += args[i];
+            load += args[i];
         if (types[i] == INDIRECT)
-            *load += *((int *)my_uint8_ndup
+            load += *((int *)my_uint8_ndup
             (corewar->arena, corewar->champions[prog_nbr]->current_pc +
             args[i], IND_SIZE));
     }
     corewar->champions[prog_nbr]->regs[args[2] - 1] = *((int *)my_uint8_ndup
             (corewar->arena, corewar->champions[prog_nbr]->current_pc +
-            *load, REG_SIZE));
-    free(load);
+            load, REG_SIZE));
 }
 
 int lldi(corewar_t *corewar, champion_t ***champion, int prog_nbr)
