@@ -74,9 +74,8 @@ int sub(corewar_t *corewar, champion_t ***champion, int prog_nbr)
 int and_i(corewar_t *corewar, champion_t ***champion, int prog_nbr)
 {
     int *args = NULL;
-    instruct_types_t *types =
-        get_instruct_types(corewar->arena[
-            ((*champion)[prog_nbr]->pc + 1) % MEM_SIZE], AND);
+    instruct_types_t *types = get_instruct_types(corewar->arena[
+        ((*champion)[prog_nbr]->pc + 1) % MEM_SIZE], AND);
     uint32_t *load = {0};
 
     if (!types)

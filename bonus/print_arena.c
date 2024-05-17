@@ -173,7 +173,6 @@ static void print_arena_in_real_time(corewar_t *corewar)
     usleep(10000);
 }
 
-
 int champion_arena(corewar_t *corewar)
 {
     int dump_stop = 0;
